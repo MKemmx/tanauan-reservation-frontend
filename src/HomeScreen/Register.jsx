@@ -487,11 +487,7 @@ const Register = () => {
               By using this service, you understood and agree to the
               <span
                 onClick={() => {
-                  window.open(
-                    "/terms-conditions",
-                    "_blank",
-                    "noopener,noreferrer"
-                  );
+                  navigate("/terms-conditions");
                 }}
                 className="font-medium cursor-pointer hover:text-[#0A3E69]  hover:underline"
               >

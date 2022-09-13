@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.terms-and-conditions {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar-bg {
+  background-color: #0a3e69;
+}
+.menu-active {
+  background-color: #114b7b;
+}
+
+/* Arrow */
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.down {
+  transform: rotate(45deg);
+}
+.up {
+  transform: rotate(-135deg);
+}
+/* Arrow */
+
+.bannerImageHead {
+  z-index: -100;
+  background-image: url("../../front-end/src/images/darken-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+/* Header Title */
+.headTitle {
+  font-family: "Roboto Slab", "Times New Roman";
+  text-shadow: 2px 3px 15px rgba(150, 150, 150, 2);
+  color: #0a3e69 !important;
+}
+
+/* React Big Calendar */
+.rbc-toolbar {
+  padding-bottom: 5px;
+}
+
+.rbc-toolbar-label {
+  font-size: 24px;
+}
+
+/* ! Data TablE Design */
+/* Table Desing */
+.rdt_Table {
+  padding-top: 8px;
+}
+
+/* Header Columns */
+.rdt_TableCol {
+  font-weight: medium;
+  font-size: 16px;
+  background-color: #114b7b;
+  color: #fff;
+}
+
+/* Rows */
+.rdt_TableRow:nth-child(even) {
+  background-color: #ecf0f3;
+  color: #222;
+}

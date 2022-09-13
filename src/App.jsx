@@ -80,22 +80,18 @@ function App() {
         )}
 
         {/* Home and Login */}
-        <div className={`${isAuthenticated && " hidden"}`}>
-          <Routes>
-            <Route path="*" element={<Page404 />} />
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/terms-conditions" element={<TermsAndConditions />} />
-            <Route
-              path="/reset-password/:_id/:emailToken"
-              element={<ResetPassword />}
-            />
-            <Route
-              path="/verify/:_id/:emailToken"
-              element={<AccountVerifer />}
-            />
-          </Routes>
-        </div>
+
+        <Routes>
+          <Route path="*" element={<Page404 />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route
+            path="/reset-password/:_id/:emailToken"
+            element={<ResetPassword />}
+          />
+          <Route path="/verify/:_id/:emailToken" element={<AccountVerifer />} />
+        </Routes>
       </>
     </>
   );

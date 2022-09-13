@@ -1,10 +1,15 @@
 import React from "react";
 
+// React Router DOM
+import { useNavigate } from "react-router-dom";
+
 // Tanauan Log
 import Tanauanlogo from "../images/tanauanlogo.jpg";
 import BetterAndBrighter from "../images/betterandbrighter.jpg";
 
 const TermsAndConditions = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="h-auto py-12 w-full flex justify-center items-center bannerImageHead terms-and-conditions">
       <div className="mx-5 lg:container h-auto rounded-2xl pb-10 bg-white">
@@ -59,7 +64,6 @@ const TermsAndConditions = () => {
             </div>
 
             {/* <h1 className="text-lg md:text-2xl font-bold mb-2"> */}
-
             <div>
               <div className="border-b border-gray-300 py-2 mb-2">
                 <h1 className="text-lg md:text-lg font-bold pb-1">
@@ -158,6 +162,19 @@ const TermsAndConditions = () => {
             <p className="text-sm md:text-base">
               Us If you have any questions about these Terms and Conditions, You
               can contact us: <br /> By email: tanauangym@gmail.com
+            </p>
+          </div>
+
+          <div className="mt-2 flex justify-between">
+            <p className="text-sm text-gray-700">
+              <span
+                onClick={() => {
+                  navigate(-1);
+                }}
+                className="hover:text-[#0A3E69] cursor-pointer"
+              >
+                Go Back
+              </span>
             </p>
           </div>
         </div>

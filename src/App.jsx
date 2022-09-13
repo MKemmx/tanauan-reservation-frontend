@@ -80,7 +80,7 @@ function App() {
         )}
 
         {/* Home and Login */}
-        {!isAuthenticated && (
+        <div className={`${isAuthenticated && " hidden"}`}>
           <Routes>
             <Route path="*" element={<Page404 />} />
             <Route path="/" element={<LoginPage />} />
@@ -95,7 +95,7 @@ function App() {
               element={<AccountVerifer />}
             />
           </Routes>
-        )}
+        </div>
       </>
     </>
   );

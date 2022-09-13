@@ -58,7 +58,7 @@ const Login = () => {
     if (checked) {
       let successAdmin = await loginAdmin(data);
       if (successAdmin) {
-        return toast.success("Welcome Back Admin!", {
+        toast.success("Welcome Back Admin!", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -68,6 +68,7 @@ const Login = () => {
           progress: undefined,
         });
       }
+      return;
     }
 
     let successUser = await loginUser(data);

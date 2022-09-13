@@ -156,12 +156,12 @@ const AddModal = ({ setShowAddModal }) => {
           </div>
 
           {loading ? (
-            <div className="w-full h-80 flex justify-center items-center">
+            <div className="w-full h-72 flex justify-center items-center ">
               <Loader />
             </div>
           ) : (
             <>
-              <form className="w-full px-6 py-5 h-80">
+              <form className="w-full px-6 py-3 h-72 ">
                 <div className="px-0 py-2">
                   <label className="block mb-1 text-md font-medium text-gray-900">
                     Event Categories:

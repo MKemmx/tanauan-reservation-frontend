@@ -266,9 +266,9 @@ const UserTable = () => {
           pagination
           subHeader
           subHeaderComponent={
-            <div className="w-full flex justify-between items-center">
+            <div className="w-full flex flex-col md:flex-row justify-between items-center">
               {data?.length >= 1 && (
-                <div className="space-x-2">
+                <div className="space-x-2 pb-2">
                   <button
                     onClick={download_pdf}
                     className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"

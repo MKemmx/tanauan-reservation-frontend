@@ -209,14 +209,14 @@ const EquipmentTable = () => {
           data={filteredData.length <= 0 ? data : filteredData}
           progressPending={loading}
           progressComponent={
-            <div className="my-18">
+            <div className="w-full flex items-center justify-center py-24">
               <Loader />
             </div>
           }
           pagination
           subHeader
           subHeaderComponent={
-            <div className="w-full flex justify-between items-end">
+            <div className="w-full flex flex-col md:flex-row justify-between items-center ">
               <div>
                 <button
                   onClick={() => {
@@ -228,7 +228,7 @@ const EquipmentTable = () => {
                 </button>
 
                 {data?.length >= 1 && (
-                  <div className="space-x-2">
+                  <div className="space-x-2 mb-2">
                     <button
                       onClick={download_pdf}
                       className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"

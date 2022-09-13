@@ -66,23 +66,11 @@ const AdminDetails = () => {
           src={adminprofile}
           alt="avatar"
         />
-        <div className="py-6 px-4 space-y-3">
-          <div className="flex items-center">
-            <BiUserCircle className="mr-2" size={26} />
-            <a className="block text-md font-normal text-gray-800 ">
-              {user?.fullName}
-            </a>
-          </div>
+        <div className="py-6 px-4 space-y-3 shadow-md">
           <div className="flex items-center">
             <AiOutlineMail className="mr-2" size={26} />
-            <a className="block text-md font-normal text-gray-800 ">
+            <a className="block text-md font-normal text-gray-800 text-lg">
               {user?.email}
-            </a>
-          </div>
-          <div className="flex items-center">
-            <AiOutlinePhone className="mr-2" size={26} />
-            <a className="block text-md font-normal text-gray-800 ">
-              {user?.phoneNumber}
             </a>
           </div>
         </div>

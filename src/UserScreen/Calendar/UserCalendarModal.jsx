@@ -25,13 +25,15 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
   const [ratingData, setRatingData] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Show Rating
+  const [showRating, setShowRating] = useState(true);
+
   // Fetch Rating
   const fetchRating = async () => {
     try {
       setLoading(true);
       const { data } = await axios.get(`${api}/rating/${reservationData._id}`);
-
-      console.log(data.rating);
+      setRatingData(data.rating);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -47,9 +49,9 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
     <div
       id="backdrop"
       onClick={handleBackdrop}
-      className="w-full h-screen absolute top-0 left-0 bg-black bg-opacity-30 z-10"
+      className="w-full h-screen absolute top-0 left-0 bg-black bg-opacity-40 z-10"
     >
-      <div className="w-full max-w-lg mx-auto bg-white mt-10 ">
+      <div className="w-full max-w-lg mx-auto bg-white mt-10">
         {/* Modal Header */}
         <div className="w-full border-b border-gray-200 flex items-center justify-between py-5 px-4">
           <h1 className="text-lg font-medium"> Reservation Detail </h1>
@@ -60,52 +62,66 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
           />
         </div>
         {/* Modal Body */}
-        <div className="w-full bg-white py-4 px-4 border-b border-gray-300 ">
+        <div className="w-full bg-white py-4 px-4 border-gray-300">
           <h1> Title: {reservationData?.title} </h1>
           <h1> Start: {moment(reservationData?.start).format("LLLL")} </h1>
           <h1> End: {moment(reservationData?.end).format("LLLL")} </h1>
         </div>
 
-        {/* Rating */}
-        {loading ? (
-          <div className="h-28 flex items-center justify-center">
-            <Loader />
-          </div>
-        ) : (
-          <div className="px-4 pb-5 pt-2">
-            {ratingData !== null ? (
-              <div>
-                <div className="flex mb-1 items-center space-x-2">
-                  <h1 className="font-medium text-lg"> User: </h1>
-                  <p className="text-md"> Anonymous </p>
-                </div>
-
-                <div className="mb-1 flex items-center space-x-3">
-                  <h1 className="font-medium text-lg"> Rating Score: </h1>
-                  <ReactStarsRating
-                    size={18}
-                    className="flex space-x-1"
-                    value={ratingData.ratingScore}
+        {showRating && (
+          <div className="border-t border-gray-200">
+            {/* Rating */}
+            {loading ? (
+              <div className="h-28 flex items-center justify-center">
+                <Loader />
+              </div>
+            ) : (
+              <div className="px-4 pb-5 pt-2 ">
+                <div className=" flex items-center justify-end">
+                  <GrFormClose
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setShowRating(false);
+                    }}
+                    size={26}
                   />
                 </div>
 
-                <div>
-                  <h1 className="font-medium text-lg"> Rating Message: </h1>
-                  <p> {ratingData.ratingMessage} </p>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center my-10">
-                <h1 className="text-lg font-medium">
-                  This reservation has no ratings!
-                </h1>
+                {ratingData !== null ? (
+                  <div>
+                    <div className="flex mb-1 items-center space-x-2">
+                      <h1 className="font-medium text-lg"> User: </h1>
+                      <p className="text-md"> Anonymous </p>
+                    </div>
+
+                    <div className="mb-1 flex items-center space-x-3">
+                      <h1 className="font-medium text-lg"> Rating Score: </h1>
+                      <ReactStarsRating
+                        size={18}
+                        className="flex space-x-1"
+                        value={ratingData.ratingScore}
+                      />
+                    </div>
+
+                    <div>
+                      <h1 className="font-medium text-lg"> Rating Message: </h1>
+                      <p> {ratingData.ratingMessage} </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center my-10">
+                    <h1 className="text-lg font-medium">
+                      This reservation has no ratings!
+                    </h1>
+                  </div>
+                )}
               </div>
             )}
           </div>
         )}
 
         {/* Modal Footer */}
-        <div className="w-full bg-white py-4 px-4 border-t border-gray-200  rounded-md">
+        <div className="w-full bg-white py-4 px-4 border-t border-gray-200 rounded-md">
           <button
             onClick={closeCalendarDetail}
             className="bg-gray-600 hover:bg-gray-700 text-white px-2 py-1.5 rounded-md"

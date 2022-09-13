@@ -48,29 +48,31 @@ const LogsTable = () => {
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="py-4 mt-5 mx-6 rounded-sm shadow-md bg-white">
-          <DataTable
-            title="System Logs"
-            columns={columns}
-            data={data}
-            pagination
-            subHeader
-            subHeaderComponent={
-              <div className="w-full flex justify-end items-center">
-                <input
-                  type="text"
-                  placeholder="Search here"
-                  id="large-input"
-                  className="block outline-none max-w-xs px-2 py-1.5 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md"
-                />
-              </div>
-            }
-          />
-        </div>
-      )}
+      <div className="py-4 mt-5 mx-6 rounded-sm shadow-md bg-white">
+        <DataTable
+          title="System Logs"
+          columns={columns}
+          data={data}
+          pagination
+          progressPending={loading}
+          progressComponent={
+            <div className="w-full flex items-center justify-center py-24">
+              <Loader />
+            </div>
+          }
+          subHeader
+          subHeaderComponent={
+            <div className="w-full flex justify-end items-center">
+              <input
+                type="text"
+                placeholder="Search here"
+                id="large-input"
+                className="block outline-none max-w-xs px-2 py-1.5 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md"
+              />
+            </div>
+          }
+        />
+      </div>
     </>
   );
 };

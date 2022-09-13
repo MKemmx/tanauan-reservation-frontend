@@ -110,7 +110,7 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
             src={reserver?.userId?.profile?.url}
           />
           {/* User Details */}
-          <div className="px-6 py-7 mt-10 flex flex-col md:flex-row justify-between items-center mb-2 shadow-md">
+          <div className="px-6 py-7 mt-10 flex flex-col md:flex-row justify-between items-start md:items-center mb-2 shadow-md">
             <div>
               <div className="flex items-center mt-2 text-gray-700">
                 <div className="flex items-center space-x-2">
@@ -157,7 +157,7 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
               </div>
               <ul className="mt-2 ml-10">
                 {reserver?.equipments?.map((item) => (
-                  <li className="list-disc">{item?.name}</li>
+                  <li className="list-disc capitalize">{item?.name}</li>
                 ))}
               </ul>
             </div>

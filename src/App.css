@@ -31,10 +31,9 @@
   transform: rotate(-135deg);
 }
 /* Arrow */
-
 .bannerImageHead {
   z-index: -100;
-  background-image: url("../../front-end/src/images/darken-bg.png");
+  background-image: url("./images/darken-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

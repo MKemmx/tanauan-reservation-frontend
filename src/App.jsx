@@ -18,9 +18,9 @@ import UserTable from "./AdminScreen/User/UserTable";
 import Reservation from "./AdminScreen/Reservation/Reservation";
 import Rating from "./AdminScreen/Rating/RatingTable";
 import EquipmentTable from "./AdminScreen/Equipment/EquipmentTable";
-import LogsTable from "./AdminScreen/Logs/LogsTable";
-import AdminDetails from "./AdminScreen/AdminDetails/AdminDetails";
 
+import AdminDetails from "./AdminScreen/AdminDetails/AdminDetails";
+import LogsTable from "./AdminScreen/Logs/LogsTable";
 // User Components
 import UserDashboard from "./UserScreen/Dashboard/UserDashboard";
 import UserAccountDetails from "./UserScreen/AccountDetails/UserAccountDetails";

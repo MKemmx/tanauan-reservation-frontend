@@ -131,15 +131,21 @@ const AdminBarChart = () => {
   };
 
   return (
-    <div className="w-full h-96 pb-20 pt-2">
+    <div className="w-full h-96 pb-20">
       {loading ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loader />
         </div>
       ) : (
         <>
-          <div className="flex justify-between items-center pb-3">
-            <div className="ml-auto space-y-1 w-40">
+          <div className="flex justify-between items-center py-2">
+            <div>
+              <h1 className="font-medium text-lg">
+                Yearly and Monthly Analytics
+              </h1>
+            </div>
+
+            <div className="space-y-1 w-40">
               <label className="text-gray-700">Select Year:</label>
               <Select
                 value={yearSelected}
@@ -160,8 +166,8 @@ const AdminBarChart = () => {
               data={data}
               margin={{
                 top: 5,
-                right: 20,
-                left: 10,
+                right: 5,
+                left: 5,
                 bottom: 5,
               }}
             >

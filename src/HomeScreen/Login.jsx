@@ -108,7 +108,7 @@ const Login = () => {
       <span
         className={`${
           reserved &&
-          "bg-red-800 text-white py-1.5 px-2.5 -ml-0.5 rounded-md  overflow-hidden"
+          "bg-red-800 text-white md:py-1.5 md:px-2.5 md:-ml-0.5 px-3 py-3 rounded-md overflow-hidden"
         }`}
         title={reserved && tooltipText}
       >
@@ -145,28 +145,37 @@ const Login = () => {
 
   return (
     <div className="h-screen w-full flex justify-center items-center bannerImageHead">
-      <div className="absolute right-10 top-7 z-100 flex flex-col">
+      <div className="absolute right-5 md:right-10 top-7 z-100 flex flex-col">
         <p
           onClick={() => {
             setShowCalendar(!showCalendar);
           }}
-          className="cursor-pointer text-lg font-semibold text-center text-white flex justify-between items-center"
+          className="cursor-pointer mdtext-lg font-semibold text-center text-white flex justify-between items-center"
         >
           {moment().format("LLLL")}
-
-          <i className={`ml-3 arrow ${showCalendar ? "up" : "down"} `}></i>
+          <i className={`ml-3 arrow  ${showCalendar ? "up" : "down"} `}></i>
         </p>
+        <div className="hidden md:block">
+          {showCalendar && (
+            <div className="w-full flex items-center justify-center py-2.5 z-50">
+              <DatePicker
+                className="mr-auto"
+                selected={new Date()}
+                renderDayContents={renderDayContents}
+                inline={true}
+              />
+            </div>
+          )}
+        </div>
 
-        {showCalendar && (
-          <div className="w-full flex items-center justify-center py-2.5">
-            <DatePicker
-              className="mr-auto"
-              selected={new Date()}
-              renderDayContents={renderDayContents}
-              inline={true}
-            />
-          </div>
-        )}
+        <div className="block md:hidden z-50 -mt-5">
+          <DatePicker
+            className="bg-red-100 w-full max-w-lg  opacity-0"
+            selected={new Date()}
+            renderDayContents={renderDayContents}
+            withPortal={true}
+          />
+        </div>
       </div>
 
       <div

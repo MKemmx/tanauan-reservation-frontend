@@ -98,7 +98,7 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
                       <h1 className="font-medium text-lg"> Rating Score: </h1>
                       <ReactStarsRating
                         size={18}
-                        className="flex space-x-1"
+                        className="flex space-x-1 pointer-events-none"
                         value={ratingData.ratingScore}
                       />
                     </div>

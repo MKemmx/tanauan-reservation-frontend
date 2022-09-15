@@ -10,10 +10,21 @@ import axios from "axios";
 
 // Compoenent Helper
 import Loader from "../../components/Loader/Loader";
+// Global State
+import useLoginState from "../../store/loginState";
 
 const LogsTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  // Login State
+  const { token } = useLoginState((state) => state);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
 
   // Data Columns
   const columns = [
@@ -33,7 +44,7 @@ const LogsTable = () => {
   const fetchLogs = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/adminLog`);
+      const { data } = await axios.get(`${api}/adminLog`, config);
       setData(data.adminLogs);
       setLoading(false);
     } catch (error) {

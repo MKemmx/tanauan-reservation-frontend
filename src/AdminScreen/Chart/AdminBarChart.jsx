@@ -22,9 +22,11 @@ import Loader from "../../components/Loader/Loader";
 
 // Admin Dashboard State
 import useDashboardState from "../../store/AdminStore/dashboardState";
+import useLoginState from "../../store/loginState";
 
 const AdminBarChart = () => {
   const { dashboardData } = useDashboardState((state) => state);
+  const { token } = useLoginState((state) => state);
 
   // Bar Data
   const [yearSelected, setYearSelected] = useState({
@@ -37,11 +39,19 @@ const AdminBarChart = () => {
   // Year Options
   const [options, setOptions] = useState([]);
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
+
   const fetchAdminBarChart = async () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `${api}/admin/barchart/${yearSelected.value}`
+        `${api}/admin/barchart/${yearSelected.value}`,
+        config
       );
       let yearlyReservations = data.barChartData.yearlyReservations;
       calcData(yearlyReservations);

@@ -14,7 +14,19 @@ import { BsTools } from "react-icons/bs";
 import api from "../../utils/api";
 import axios from "axios";
 
+// State
+import useLoginState from "../../store/loginState";
+
 const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
+  const { token } = useLoginState((state) => state);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
+
   const confirmButton = (e) => {
     e.preventDefault();
     Swal.fire({
@@ -59,9 +71,10 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
         {
           reservationId: reserver?._id,
           status,
-        }
+        },
+        config
       );
-      fetchReservations();
+      await fetchReservations();
 
       return toast.success(`${data.msg}`, {
         position: "top-right",

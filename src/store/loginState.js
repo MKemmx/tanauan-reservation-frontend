@@ -117,11 +117,18 @@ const loginStore = (set, get) => ({
     let oldState = get();
 
     try {
-      await axios.post(`${api}/user/reset-password`, value);
       set({
         ...oldState,
+        loading: true,
+      });
+
+      await axios.post(`${api}/user/reset-password`, value);
+
+      set({
+        loading: false,
         resetPasswordRequest: true,
       });
+
       return Swal.fire(
         "Success",
         `We have sent you a reset password link!`,
@@ -131,6 +138,7 @@ const loginStore = (set, get) => ({
       set({
         ...oldState,
         resetPasswordRequest: false,
+        loading: false,
       });
       return Swal.fire("Error", `${error.response.data.msg}`, "error");
     }
@@ -145,7 +153,7 @@ const loginStore = (set, get) => ({
       });
 
       await axios.post(`${api}/user/new-password`, value);
-      toast.success("Password reset success!", {
+      toast.success("Password has been changed!", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -169,6 +177,8 @@ const loginStore = (set, get) => ({
     }
   },
   changePasswordUser: async (value) => {
+    let oldState = get();
+
     const token = get().token;
     const config = {
       headers: {
@@ -178,6 +188,11 @@ const loginStore = (set, get) => ({
     };
 
     try {
+      set({
+        ...oldState,
+        loading: true,
+      });
+
       await axios.post(
         `${api}/change-password/user`,
         {
@@ -191,8 +206,18 @@ const loginStore = (set, get) => ({
         `Password has successfully been updated`,
         "success"
       );
+
+      set({
+        ...oldState,
+        loading: false,
+      });
+
       return true;
     } catch (error) {
+      set({
+        ...oldState,
+        loading: false,
+      });
       Swal.fire("Error", `${error.response.data.msg}`, "error");
       return false;
     }

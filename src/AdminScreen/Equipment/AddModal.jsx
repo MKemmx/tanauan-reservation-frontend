@@ -11,15 +11,27 @@ import axios from "axios";
 // Components
 import Loader from "../../components/Loader/Loader";
 
+// State
+import useLoginState from "../../store/loginState";
+
 const AddModal = ({ fetchEquipments, closeAddModal }) => {
   const handleBackdrop = (e) => {
     let id = e.target.id;
     if (id === "backdrop") return closeAddModal();
   };
 
+  const { token } = useLoginState((state) => state);
+
   // Name
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
 
   const handleEquipment = async (e) => {
     e.preventDefault();
@@ -30,7 +42,11 @@ const AddModal = ({ fetchEquipments, closeAddModal }) => {
 
     try {
       setLoading(true);
-      await axios.post(`${api}/equipment`, { name: data.toLowerCase() });
+      await axios.post(
+        `${api}/equipment`,
+        { name: data.toLowerCase() },
+        config
+      );
       await fetchEquipments();
       closeAddModal();
       setLoading(false);
@@ -66,7 +82,7 @@ const AddModal = ({ fetchEquipments, closeAddModal }) => {
             <Loader />
           </div>
         ) : (
-          <form className="px-5 pb-8">
+          <form autoComplete="off" className="px-5 pb-8">
             <div className="mt-4">
               <label className="block mb-2 text-base font-medium text-gray-600">
                 Equipment Name:

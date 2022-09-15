@@ -29,12 +29,6 @@ const AddModal = ({ setShowAddModal }) => {
   const { fetchMyReservations } = UserReservations((state) => state);
   const { fetchReservations } = useUserCalendar((state) => state);
   const { token } = useLoginState((state) => state);
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "auth-token": token,
-    },
-  };
 
   // Local State
   const [loading, setLoading] = useState(false);
@@ -45,6 +39,13 @@ const AddModal = ({ setShowAddModal }) => {
   const [endDate, setEndDate] = useState(
     setHours(setMinutes(new Date(), 0), 22)
   );
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
 
   const handleReservation = async (e) => {
     e.preventDefault();
@@ -112,7 +113,10 @@ const AddModal = ({ setShowAddModal }) => {
   const fetchAvailableEquipments = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/equipment/available-equipment`);
+      const { data } = await axios.get(
+        `${api}/equipment/available-equipment`,
+        config
+      );
       let options = data.equipments.map((item) => {
         return {
           value: item._id,

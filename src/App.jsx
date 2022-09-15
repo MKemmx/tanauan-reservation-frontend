@@ -26,6 +26,7 @@ import UserDashboard from "./UserScreen/Dashboard/UserDashboard";
 import UserAccountDetails from "./UserScreen/AccountDetails/UserAccountDetails";
 import AccountVerifer from "./UserScreen/AccountVerifier/AccountVerifier";
 import ResetPassword from "./UserScreen/ResetPassword/ResetPassword";
+import ChangePassword from "./UserScreen/ChangePassword/ChangePassword";
 
 // User Layout
 import UserLayout from "./UserScreen/Layout/UserLayout";
@@ -75,6 +76,7 @@ function App() {
               <Route path="*" element={<Page404 />} />
               <Route path="/" element={<UserDashboard />} />
               <Route path="/account-details" element={<UserAccountDetails />} />
+              <Route path="/change-password" element={<ChangePassword />} />
             </Routes>
           </UserLayout>
         )}

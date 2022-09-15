@@ -154,11 +154,17 @@ const UserTable = () => {
 
   // Loader Component
   const [loading, setLoading] = useState(false);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
 
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/user/`);
+      const { data } = await axios.get(`${api}/user/`, config);
       const mainData = data.users.map((user) => {
         return {
           ...user,

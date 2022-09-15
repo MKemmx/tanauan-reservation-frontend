@@ -127,11 +127,16 @@ const EquipmentTable = () => {
       },
     },
   ];
-
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
   const fetchEquipments = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/equipment`);
+      const { data } = await axios.get(`${api}/equipment`, config);
       setData(data.equipments);
       setLoading(false);
     } catch (error) {
@@ -142,7 +147,7 @@ const EquipmentTable = () => {
 
   const updateEquipmentStatus = async ({ id, status }) => {
     try {
-      await axios.put(`${api}/equipment/update-status/${id}`, {
+      await axios.put(`${api}/equipment/update-status/${id}`, config, {
         status: status,
       });
       await fetchEquipments();

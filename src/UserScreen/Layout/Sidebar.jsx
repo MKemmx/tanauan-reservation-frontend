@@ -30,7 +30,7 @@ const Sidebar = () => {
         `}
       >
         {/* Brand - Logo */}
-        <div class="mb-5">
+        <div className="mb-5">
           {openSideNav && (
             <div className="flex flex-col w-full h-full items-center py-2">
               <img

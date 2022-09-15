@@ -22,8 +22,14 @@ import PrintLetter from "./PrintLetter/PrintLetter";
 // View Modal
 import ViewModal from "./ViewModal";
 
+// State
+import useLoginState from "../../store/loginState";
+
 const Reservation = () => {
   const [data, setData] = useState([]);
+
+  // State
+  const { token } = useLoginState((state) => state);
 
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -118,11 +124,18 @@ const Reservation = () => {
     },
   ];
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
+
   // Fetch Reservations
   const fetchReservations = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/reservation`);
+      const { data } = await axios.get(`${api}/reservation`, config);
 
       setData(
         data.reservation.map((reser) => {

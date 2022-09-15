@@ -14,18 +14,30 @@ import api from "../../utils/api";
 // Components
 import Loader from "../../components/Loader/Loader";
 
+// State
+import useLoginState from "../../store/loginState";
+
 const AddRatingModal = ({ addRatingData, setAddRatingData }) => {
   const closeModal = () => {
     setAddRatingData(null);
   };
+  const handleBackDrop = (e) => {
+    let id = e.target.id;
+    if (id === "backdrop") return closeModal();
+  };
+
+  // State
+  const { token } = useLoginState((state) => state);
 
   const [ratingScore, setRatingScore] = useState(0);
   const [ratingMessage, setRatingMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleBackDrop = (e) => {
-    let id = e.target.id;
-    if (id === "backdrop") return closeModal();
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
   };
 
   const handleAddRating = async (e) => {
@@ -37,7 +49,7 @@ const AddRatingModal = ({ addRatingData, setAddRatingData }) => {
 
     try {
       setLoading(true);
-      await axios.post(`${api}/rating`, myData);
+      await axios.post(`${api}/rating`, myData, config);
       closeModal();
       setLoading(false);
       return Swal.fire(

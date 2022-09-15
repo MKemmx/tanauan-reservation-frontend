@@ -13,6 +13,9 @@ import axios from "axios";
 // Components
 import Loader from "../../components/Loader/Loader";
 
+// State
+import useLoginState from "../../store/loginState";
+
 const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
   let reservationData = showCalendarDetail;
 
@@ -21,9 +24,18 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
     if (id === "backdrop") return closeCalendarDetail();
   };
 
+  const { token } = useLoginState((state) => state);
+
   // State
   const [ratingData, setRatingData] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
 
   // Show Rating
   const [showRating, setShowRating] = useState(true);
@@ -32,7 +44,10 @@ const UserCalendarModal = ({ showCalendarDetail, closeCalendarDetail }) => {
   const fetchRating = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/rating/${reservationData._id}`);
+      const { data } = await axios.get(
+        `${api}/rating/${reservationData._id}`,
+        config
+      );
       setRatingData(data.rating);
       setLoading(false);
     } catch (error) {

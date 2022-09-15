@@ -86,10 +86,16 @@ const RatingTable = () => {
     },
   ];
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
   const fetchRatings = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/rating`);
+      const { data } = await axios.get(`${api}/rating`, config);
 
       setData(data.ratings);
       setLoading(false);

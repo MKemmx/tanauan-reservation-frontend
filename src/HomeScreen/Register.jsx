@@ -14,6 +14,9 @@ import { getBarangayByMun } from "phil-reg-prov-mun-brgy";
 // Loader Component
 import Loader from "../components/Loader/Loader";
 
+// React Icons
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+
 const Register = () => {
   const navigate = useNavigate();
 
@@ -141,6 +144,10 @@ const Register = () => {
       label: barangay.name,
     };
   });
+
+  //
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
 
   return (
     <div className="h-screen overflow-y-auto w-full flex justify-center bannerImageHead">
@@ -316,7 +323,7 @@ const Register = () => {
                   </div>
 
                   <div className="flex flex-col md:flex-row md:space-x-5">
-                    <div className="w-full">
+                    <div className="w-full relative">
                       <label className="block mb-2 text-sm font-medium text-gray-700">
                         Password
                       </label>
@@ -338,12 +345,30 @@ const Register = () => {
                         // value={data.password}
                         // onChange={handleChange}
                         className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                        type="password"
+                        type={showPass ? "text" : "password"}
                       />
+
+                      {showPass ? (
+                        <AiOutlineEye
+                          onClick={() => {
+                            setShowPass(false);
+                          }}
+                          size={20}
+                          className="absolute top-10 right-3 cursor-pointer"
+                        />
+                      ) : (
+                        <AiOutlineEyeInvisible
+                          onClick={() => {
+                            setShowPass(true);
+                          }}
+                          size={20}
+                          className="absolute top-10 right-3 cursor-pointer"
+                        />
+                      )}
                     </div>
 
                     <div className="w-full flex flex-col">
-                      <div>
+                      <div className="w-full relative">
                         <label className="block mb-2 text-sm font-medium text-gray-700">
                           Confirm Password
                         </label>
@@ -362,8 +387,25 @@ const Register = () => {
                           // value={data.confirmPassword}
                           // onChange={handleChange}
                           className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                          type="password"
-                        />
+                          type={showConfirmPass ? "text" : "password"}
+                        />{" "}
+                        {showConfirmPass ? (
+                          <AiOutlineEye
+                            onClick={() => {
+                              setShowConfirmPass(false);
+                            }}
+                            size={20}
+                            className="absolute top-10 right-3 cursor-pointer"
+                          />
+                        ) : (
+                          <AiOutlineEyeInvisible
+                            onClick={() => {
+                              setShowConfirmPass(true);
+                            }}
+                            size={20}
+                            className="absolute top-10 right-3 cursor-pointer"
+                          />
+                        )}
                       </div>
 
                       {passwordError !== null && (

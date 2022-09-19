@@ -34,10 +34,10 @@ const ChangePassword = () => {
   const changePassBTN = async (e) => {
     e.preventDefault();
     if (data.currentPassword === "") {
-      return Swal.fire("Error", "Please enter your new password", "error");
+      return Swal.fire("Error", "Please enter your old password", "error");
     }
     if (data.newPassword === "") {
-      return Swal.fire("Error", "Please enter password confirmation", "error");
+      return Swal.fire("Error", "Please enter new password ", "error");
     }
 
     const success = await changePasswordUser(data);
@@ -109,16 +109,16 @@ const ChangePassword = () => {
                   onClick={() => {
                     setShowOldPass(true);
                   }}
-                  className="absolute top-10 right-2"
-                  size={24}
+                  className="absolute top-10 right-3"
+                  size={20}
                 />
               ) : (
                 <AiOutlineEye
                   onClick={() => {
                     setShowOldPass(false);
                   }}
-                  className="absolute top-10 right-2"
-                  size={24}
+                  className="absolute top-10 right-3"
+                  size={20}
                 />
               )}
             </div>
@@ -140,16 +140,16 @@ const ChangePassword = () => {
                   onClick={() => {
                     setShowNewPass(true);
                   }}
-                  className="absolute top-10 right-2"
-                  size={24}
+                  className="absolute top-10 right-3"
+                  size={20}
                 />
               ) : (
                 <AiOutlineEye
                   onClick={() => {
                     setShowNewPass(false);
                   }}
-                  className="absolute top-10 right-2"
-                  size={24}
+                  className="absolute top-10 right-3"
+                  size={20}
                 />
               )}
             </div>

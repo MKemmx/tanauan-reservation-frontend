@@ -150,9 +150,7 @@ const AdminBarChart = () => {
         <>
           <div className="flex justify-between items-center py-2">
             <div>
-              <h1 className="font-medium text-lg">
-                Yearly and Monthly Analytics
-              </h1>
+              <h1 className="font-medium text-lg">Yearly Analytics</h1>
             </div>
 
             <div className="space-y-1 w-40">

@@ -92,7 +92,6 @@ function App() {
               path="/reset-password/:_id/:emailToken"
               element={<ResetPassword />}
             />
-
             <Routes>
               <Route
                 path="/verify/:_id/:emailToken"

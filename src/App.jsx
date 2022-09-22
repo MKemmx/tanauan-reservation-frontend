@@ -92,12 +92,12 @@ function App() {
               path="/reset-password/:_id/:emailToken"
               element={<ResetPassword />}
             />
-            <Route
-              path="/verify/:_id/:emailToken"
-              element={<AccountVerifer />}
-            />
           </Routes>
         )}
+
+        <Routes>
+          <Route path="/verify/:_id/:emailToken" element={<AccountVerifer />} />
+        </Routes>
       </>
     </>
   );

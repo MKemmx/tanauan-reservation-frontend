@@ -279,7 +279,8 @@ const Login = () => {
               By using this service, you understood and agree to the{" "}
               <span
                 onClick={() => {
-                  navigate("/terms-conditions");
+                  let termsLink = `${window.origin}/terms-conditions`;
+                  window.open(termsLink, "_blank");
                 }}
                 className="font-medium cursor-pointer hover:text-[#0A3E69] hover:underline"
               >

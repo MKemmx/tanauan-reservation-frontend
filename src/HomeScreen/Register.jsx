@@ -529,11 +529,11 @@ const Register = () => {
               By using this service, you understood and agree to the
               <span
                 onClick={() => {
-                  navigate("/terms-conditions");
+                  let termsLink = `${window.origin}/terms-conditions`;
+                  window.open(termsLink, "_blank");
                 }}
                 className="font-medium cursor-pointer hover:text-[#0A3E69]  hover:underline"
               >
-                {" "}
                 Tanauan Civic Center Online Reservation System Services Terms of
                 Use and Privacy Statement
               </span>

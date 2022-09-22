@@ -164,19 +164,6 @@ const TermsAndConditions = () => {
               can contact us: <br /> By email: tanauangym@gmail.com
             </p>
           </div>
-
-          <div className="mt-2 flex justify-between">
-            <p className="text-sm text-gray-700">
-              <span
-                onClick={() => {
-                  navigate(-1);
-                }}
-                className="hover:text-[#0A3E69] cursor-pointer"
-              >
-                Go Back
-              </span>
-            </p>
-          </div>
         </div>
       </div>
     </div>

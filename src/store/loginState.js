@@ -68,6 +68,7 @@ const loginStore = (set, get) => ({
   },
   registerUser: async (value) => {
     const oldState = get();
+
     const formData = new FormData();
     formData.append("profile", value.profile);
     formData.append("firstName", value.firstName);
@@ -79,6 +80,13 @@ const loginStore = (set, get) => ({
     formData.append("password", value.password);
     formData.append("frontID", value.frontID);
     formData.append("backID", value.backID);
+    formData.append("organizationType", value.organizationType);
+    if (value.organizationType.toLowerCase() === "government") {
+      formData.append("governmentLetter", value.governmentLetter);
+    } else {
+      formData.append("governmentLetter", null);
+    }
+
     try {
       set({
         ...oldState,

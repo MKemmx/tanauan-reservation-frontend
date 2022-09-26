@@ -28,9 +28,11 @@ const Register = () => {
     phoneNumber: "",
     gender: "",
     barangay: "",
+    organizationType: "",
     profile: null,
     frontID: null,
     backID: null,
+    governmentLetter: null,
   });
 
   // Password State
@@ -101,6 +103,21 @@ const Register = () => {
       return Swal.fire("Error", "Back ID is required!", "error");
     }
 
+    if (data.organizationType === "") {
+      return Swal.fire(
+        "Error",
+        "Please select what type of Organization are you",
+        "error"
+      );
+    }
+
+    if (
+      data.governmentLetter === null &&
+      data.organizationType === "government"
+    ) {
+      return Swal.fire("Error", "Please upload approval letter", "error");
+    }
+
     const userData = {
       ...data,
       password,
@@ -145,7 +162,7 @@ const Register = () => {
     };
   });
 
-  //
+  // Show Pass States
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
 
@@ -497,6 +514,72 @@ const Register = () => {
                       )}
                     </div>
                   </div>
+                  <div className="flex flex-col md:flex-row md:space-x-5 mt-5">
+                    <div className="w-full">
+                      <label className="block mb-2 text-sm font-medium text-gray-700">
+                        Type of Organization
+                      </label>
+                      <Select
+                        placeholder=""
+                        className="text-gray-700 bg-white border border-gray-100 rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                        onChange={({ value }) => {
+                          setData({
+                            ...data,
+                            organizationType: value,
+                          });
+                        }}
+                        name="organizationType"
+                        options={[
+                          { value: "government", label: "Government" },
+                          { value: "nonGovernment", label: "Non-government" },
+                        ]}
+                      />
+                    </div>
+                  </div>
+
+                  {data.organizationType === "government" && (
+                    <div className="flex flex-col md:flex-row md:space-x-5 mb-5">
+                      <div className="w-full">
+                        <label className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white  border rounded-md cursor-pointer">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-gray-700 "
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                            />
+                          </svg>
+                          <h2 className="mx-3 text-gray-700">Upload Letter</h2>
+                          <input
+                            name="governmentLetter"
+                            onChange={handlePhoto}
+                            id="dropzone-file"
+                            type="file"
+                            className="hidden"
+                          />
+                        </label>
+
+                        {data?.governmentLetter !== null && (
+                          <div className="w-full mt-4">
+                            <img
+                              className="rounded-lg h-60 w-full mx-auto object-contain"
+                              src={
+                                data?.governmentLetter !== null &&
+                                URL.createObjectURL(data?.governmentLetter)
+                              }
+                              alt="goverment-letter"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </form>
 
@@ -526,7 +609,7 @@ const Register = () => {
 
           <div className="mt-6 max-w-md mx-auto">
             <p className="text-sm text-center text-gray-500">
-              By using this service, you understood and agree to the
+              By using this service, you understood and agree to the{" "}
               <span
                 onClick={() => {
                   let termsLink = `${window.origin}/terms-conditions`;

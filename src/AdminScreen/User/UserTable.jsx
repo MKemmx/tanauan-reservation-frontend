@@ -73,6 +73,15 @@ const UserTable = () => {
       sortable: true,
     },
     {
+      name: "Organization Type",
+      selector: (row) => (
+        <>
+          <p className="capitalize">{row.organizationType}</p>
+        </>
+      ),
+      sortable: true,
+    },
+    {
       name: "Emaill Verified",
       selector: (row) => {
         return (
@@ -171,6 +180,7 @@ const UserTable = () => {
           createdAt: moment(user.createdAt).format("l"),
         };
       });
+
       setData(mainData);
       setLoading(false);
     } catch (error) {
@@ -192,6 +202,7 @@ const UserTable = () => {
         item.barangay.toLowerCase().match(search.toLowerCase()) ||
         item.phoneNumber.match(search) ||
         item.email.toLowerCase().match(search.toLowerCase()) ||
+        item.organizationType.toLowerCase().match(search.toLowerCase()) ||
         item.isVerified.toString().toLowerCase().match(search.toLowerCase()) ||
         item.status.toLowerCase().match(search.toLowerCase())
         // item.createdAt.toLowerCase().match(search.toLowerCase())

@@ -8,12 +8,14 @@ import { toast } from "react-toastify";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import { BsHouseDoor } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
+import { RiGovernmentLine } from "react-icons/ri";
 
 // API AND AXIOS
 import api from "../../utils/api";
 import axios from "axios";
 
 const ViewModal = ({ user, setShowModal, fetchUsers }) => {
+  console.log(user);
   // Activate Account
   const confirmAccountBtn = (e) => {
     e.preventDefault();
@@ -113,34 +115,57 @@ const ViewModal = ({ user, setShowModal, fetchUsers }) => {
             </p>
             <div className="flex items-center mt-2 text-gray-700">
               <AiOutlineMail size={22} />
-              <h1 className="px-2 text-base"> {user?.email} </h1>
+              <h1 className="px-2 text-base"> : {user?.email} </h1>
             </div>
             <div className="flex items-center mt-2 text-gray-700">
               <AiOutlinePhone size={22} />
-              <h1 className="px-2 text-base"> {user?.phoneNumber} </h1>
+              <h1 className="px-2 text-base"> : {user?.phoneNumber} </h1>
             </div>
             <div className="flex items-center mt-2 text-gray-700">
               <BsHouseDoor size={22} />
-              <h1 className="px-2 text-md">{user?.barangay} </h1>
+              <h1 className="px-2 text-md"> : {user?.barangay} </h1>
+            </div>
+
+            <div className="flex items-center mt-2 text-gray-700">
+              <RiGovernmentLine size={22} />
+              <h1 className="px-2 text-md capitalize">
+                : {user?.organizationType}{" "}
+              </h1>
             </div>
           </div>
 
           {/* Ids */}
           <div className="w-full flex flex-col items-center justify-between space-y-3 space-x-5 py-2 md:flex-row">
-            <div className="shadow-lg px-4 flex flex-col justify-end ">
+            <div className="shadow-lg px-4 py-2 flex flex-col justify-end">
               <h2 className="text-lg font-medium text-center my-2">Front ID</h2>
-              <img className="object-cover h-48" src={user?.frontID.url} />
+              <img className="object-contain h-48" src={user?.frontID.url} />
             </div>
 
-            <div className="shadow-lg px-4 flex flex-col justify-end">
+            <div className="shadow-lg px-4 py-2 flex flex-col justify-end">
               <h2 className="text-lg font-medium text-center my-2">Back ID</h2>
               <img
-                className="object-cover h-48"
+                className="object-contain h-48"
                 src={user?.backID.url}
                 alt={user?.email}
               />
             </div>
           </div>
+
+          {/* Letter */}
+          {user?.organizationType.toLowerCase() === "government" && (
+            <>
+              <div className="shadow-lg w-fit mx-auto p-3">
+                <h2 className="text-lg font-medium text-center mt-2 mb-4">
+                  Approval Letter
+                </h2>
+                <img
+                  className="object-contain h-44 w-full mx-auto"
+                  src={user?.governmentLetter?.url}
+                  alt={user?.email}
+                />
+              </div>
+            </>
+          )}
         </div>
 
         {/* Modal Footer */}

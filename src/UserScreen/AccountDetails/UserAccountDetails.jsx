@@ -79,6 +79,18 @@ const UserAccountDetails = () => {
                 Barangay:
                 <span className="font-medium"> {user?.barangay} </span>
               </h1>
+
+              {user.organizationType === "nonGovernment" ? (
+                <h1>
+                  Account Type:
+                  <span className="font-medium"> Non Govenment </span>
+                </h1>
+              ) : (
+                <h1>
+                  Account Type:
+                  <span className="font-medium">Goverment Account </span>
+                </h1>
+              )}
             </div>
             {/* Account IDS */}
             <div className="flex flex-col w-full items-center ">

@@ -287,6 +287,7 @@ const Register = () => {
                         </label>
                       </div>
                       <input
+                        placeholder="09"
                         name="phoneNumber"
                         value={data.phoneNumber}
                         onChange={handleChange}

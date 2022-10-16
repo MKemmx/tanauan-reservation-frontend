@@ -116,7 +116,7 @@ const Login = () => {
       </span>
     );
   };
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(true);
 
   // Fetch Events
   useEffect(() => {
@@ -167,10 +167,9 @@ const Login = () => {
             </div>
           )}
         </div>
-
         <div className="block md:hidden z-50 -mt-5">
           <DatePicker
-            className="bg-red-100 w-full max-w-lg  opacity-0"
+            className="bg-red-100 w-full max-w-lg opacity-0"
             selected={new Date()}
             renderDayContents={renderDayContents}
             withPortal={true}
@@ -276,7 +275,7 @@ const Login = () => {
 
           <div className="mt-6 px-2">
             <p className="text-sm text-center text-gray-500">
-              By using this service, you understood and agree to the{" "}
+              By using this service, you understood and agree to the
               <span
                 onClick={() => {
                   let termsLink = `${window.origin}/terms-conditions`;

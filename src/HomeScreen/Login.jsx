@@ -163,6 +163,7 @@ const Login = () => {
                 selected={new Date()}
                 renderDayContents={renderDayContents}
                 inline={true}
+                minDate={moment().toDate()}
               />
             </div>
           )}
@@ -173,6 +174,7 @@ const Login = () => {
             selected={new Date()}
             renderDayContents={renderDayContents}
             withPortal={true}
+            minDate={moment().toDate()}
           />
         </div>
       </div>

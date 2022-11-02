@@ -11,6 +11,7 @@ import { FaUsers } from "react-icons/fa";
 import { MdOutlineComputer } from "react-icons/md";
 import { BiCalendarCheck } from "react-icons/bi";
 import { BsTools } from "react-icons/bs";
+import { AiOutlineStar } from "react-icons/ai";
 
 // Login State
 import useLoginState from "../../store/loginState";
@@ -33,7 +34,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="flex items-center px-10 py-5 bg-white border-r-8 border-sky-500 rounded-xl shadow-lg">
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
@@ -50,7 +51,7 @@ const Dashboard = () => {
                   <CountUp
                     className="text-2xl "
                     duration={animationDuration}
-                    end={dashboardData.reservations}
+                    end={dashboardData.rating}
                   />
                 </p>
               </div>
@@ -106,6 +107,30 @@ const Dashboard = () => {
           )}
         </div>
 
+        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-yellow-500 rounded-xl shadow-lg">
+          {loading ? (
+            <div className="w-full flex justify-center items-center py-5">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              <div className="mr-8 bg-yellow-500 p-3 rounded-full">
+                <AiOutlineStar size={30} color="#fff" />
+              </div>
+              <div>
+                <h2 className="text-lg text"> Ratings </h2>
+                <p className="text-gray-700 text-base">
+                  <CountUp
+                    className="text-2xl "
+                    duration={animationDuration}
+                    end={dashboardData.rating}
+                  />
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+
         <div className="flex items-center px-10 py-5 bg-white border-r-8 border-gray-500 rounded-xl shadow-lg">
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
@@ -132,7 +157,7 @@ const Dashboard = () => {
       </div>
 
       {/* Bar Chart */}
-      <div className="mt-5 mx-5 mb-10 rounded-sm shadow-xl py-5 px-8 bg-white">
+      <div className="mt-5 mx-5 bg-white rounded-sm shadow-xl">
         <AdminBarChart />
       </div>
 

@@ -99,7 +99,7 @@ const EquipmentTable = () => {
                   className={`flex items-center bg-red-600 hover:bg-red-700 text-white py-1.5 px-2 font-medium duration-200 ease-in-out capitalize rounded-lg`}
                 >
                   Archive
-                  <MdDeleteOutline className="ml-1" size={18} />
+                  {/* <MdDeleteOutline className="ml-1" size={18} /> */}
                 </button>
               ) : (
                 <button
@@ -109,7 +109,7 @@ const EquipmentTable = () => {
                   className={`flex items-center bg-green-600 hover:bg-green-700 text-white py-1.5 px-2 font-medium duration-200 ease-in-out capitalize rounded-lg`}
                 >
                   Activate
-                  <BsCheck className="ml-1" size={18} />
+                  {/* <BsCheck className="ml-1" size={18} /> */}
                 </button>
               )}
 
@@ -147,9 +147,13 @@ const EquipmentTable = () => {
 
   const updateEquipmentStatus = async ({ id, status }) => {
     try {
-      await axios.put(`${api}/equipment/update-status/${id}`, config, {
-        status: status,
-      });
+      await axios.put(
+        `${api}/equipment/update-status/${id}`,
+        {
+          status: status,
+        },
+        config
+      );
       await fetchEquipments();
       return Swal.fire("Success", `Equipment is now ${status}`, "success");
     } catch (error) {
@@ -182,8 +186,11 @@ const EquipmentTable = () => {
   // Export PDF
   const download_pdf = () => {
     let doc = new jsPDF("l");
+
+    let toPrintArray = filteredData.length >= 1 ? filteredData : data;
+
     let head = [["Equipment Name", "Status"]];
-    let body = data.map((item) => {
+    let body = toPrintArray.map((item) => {
       return [item.name, item.status];
     });
     doc.autoTable({ head: head, body: body });
@@ -243,7 +250,7 @@ const EquipmentTable = () => {
                     <CSVLink
                       className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
                       filename={"equipment.csv"}
-                      data={data}
+                      data={filteredData.length >= 1 ? filteredData : data}
                       headers={headers}
                     >
                       Export CSV

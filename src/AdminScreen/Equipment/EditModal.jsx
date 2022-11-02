@@ -8,17 +8,28 @@ import Swal from "sweetalert2";
 import api from "../../utils/api";
 import axios from "axios";
 
+// Global State
+import useLoginState from "../../store/loginState";
+
 // Components
 import Loader from "../../components/Loader/Loader";
 
 const Edit = ({ editModalData, fetchEquipments, closeEditModal }) => {
+  // Login State
+  const { token } = useLoginState((state) => state);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "auth-token": token,
+    },
+  };
+
   const handleBackdrop = (e) => {
     let id = e.target.id;
     if (id === "backdrop") return closeEditModal();
   };
 
   // Name
-
   const [data, setData] = useState(editModalData.name);
   const [loading, setLoading] = useState(false);
 
@@ -31,9 +42,13 @@ const Edit = ({ editModalData, fetchEquipments, closeEditModal }) => {
 
     try {
       setLoading(true);
-      await axios.put(`${api}/equipment/${editModalData._id}`, {
-        name: data.toLowerCase(),
-      });
+      await axios.put(
+        `${api}/equipment/${editModalData._id}`,
+        {
+          name: data.toLowerCase(),
+        },
+        config
+      );
       await fetchEquipments();
       closeEditModal();
       setLoading(false);

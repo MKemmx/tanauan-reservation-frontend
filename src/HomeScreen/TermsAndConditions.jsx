@@ -29,21 +29,36 @@ const TermsAndConditions = () => {
         <div className="px-8 md:px-14">
           <div className="mb-8">
             <h1 className="font-bold text-center text-2xl md:text-3xl">
-              Online Services Terms of Use and Privacy Statement
+              Online Services Terms of Use and Conditions
             </h1>
           </div>
 
           <div className="border-b border-gray-300 py-2 mb-2">
             <h1 className="text-lg md:text-2xl font-bold mb-2">
-              Terms and Conditions:
+              Terms and Conditions
             </h1>
-            <p className=" text-sm md:text-base">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero
-              inventore facere ad, possimus itaque voluptates hic autem
-              officiis, iste, maxime delectus placeat explicabo dolores odit
-              asperiores iure! Labore maxime cupiditate assumenda dolor repellat
-              vel, explicabo reiciendis fugit, dignissimos at praesentium eum
-              mollitia. Magnam cum fuga illum veritatis vitae molestiae quidem.
+            <p>
+              Last updated: October 20, 2022. <br /> Thank you for visiting the
+              TANAUAN CIVIC CENTER RESERVATION SYSTEM. Please read these Terms
+              of Condition carefully before using the TCCRS website and its
+              online services operated by General Services of Tanauan Leyte
+              Philippines.
+            </p>
+          </div>
+
+          <div className="border-b border-gray-300 py-2 mb-2">
+            <h1 className="text-lg md:text-2xl font-bold mb-2">
+              Acknowledgement
+            </h1>
+            <p>
+              These are the Terms and Conditions governing the use of this
+              Service and the agreement that operates between You and the
+              Tanauan Civic Center Reservation. These Terms and Conditions set
+              out the rights and obligations of all users regarding the use of
+              the Service. Your access to and use of the Service is conditioned
+              on Your acceptance of and compliance with these Terms and
+              Conditions. These Terms and Conditions apply to all visitors,
+              users and others who access or use the Service.
             </p>
           </div>
 

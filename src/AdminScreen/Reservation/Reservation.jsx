@@ -184,6 +184,8 @@ const Reservation = () => {
 
   // Export PDF
   const download_pdf = () => {
+    let toPrintArray = filteredData.length >= 1 ? filteredData : data;
+
     let doc = new jsPDF("l");
     let head = [
       [
@@ -195,7 +197,7 @@ const Reservation = () => {
         "Reservation Status",
       ],
     ];
-    let body = data.map((item) => {
+    let body = toPrintArray.map((item) => {
       return [
         item.userId.firstName,
         item.userId.lastName,
@@ -245,7 +247,7 @@ const Reservation = () => {
                   <CSVLink
                     className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
                     filename={"reservers.csv"}
-                    data={data}
+                    data={filteredData.length >= 1 ? filteredData : data}
                     headers={headers}
                   >
                     Export CSV

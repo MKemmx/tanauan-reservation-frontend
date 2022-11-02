@@ -130,8 +130,11 @@ const RatingTable = () => {
   // Export PDF
   const download_pdf = () => {
     let doc = new jsPDF("l");
+
+    let toPrintArray = filteredData.length >= 1 ? filteredData : data;
+
     let head = [["Rating Rate", "Rating Message"]];
-    let body = data.map((item) => {
+    let body = toPrintArray.map((item) => {
       return [item.ratingScore, item.ratingMessage];
     });
     doc.autoTable({ head: head, body: body });
@@ -171,7 +174,7 @@ const RatingTable = () => {
                     <CSVLink
                       className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
                       filename={"equipment.csv"}
-                      data={data}
+                      data={filteredData.length >= 1 ? filteredData : data}
                       headers={headers}
                     >
                       Export CSV

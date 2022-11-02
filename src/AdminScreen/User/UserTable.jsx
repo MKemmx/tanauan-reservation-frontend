@@ -228,6 +228,8 @@ const UserTable = () => {
   // Export PDF
   const download_pdf = () => {
     let doc = new jsPDF("l");
+    let toPrintArray = filteredData.length >= 1 ? filteredData : data;
+
     let head = [
       [
         "First Name",
@@ -240,7 +242,7 @@ const UserTable = () => {
         "Account Status",
       ],
     ];
-    let body = data.map((user) => {
+    let body = toPrintArray.map((user) => {
       return [
         user.firstName,
         user.lastName,
@@ -295,7 +297,7 @@ const UserTable = () => {
                   <CSVLink
                     className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
                     filename={"users.csv"}
-                    data={data}
+                    data={filteredData.length >= 1 ? filteredData : data}
                     headers={headers}
                   >
                     Export CSV

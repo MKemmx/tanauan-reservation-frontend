@@ -18,7 +18,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`overflow-x-hidden ease-in-out duration-300 h-screen sidebar-bg ${
+      className={`overflow-x-hidden ease-in-out duration-300 h-screen bg-[#0a3e69] ${
         openSideNav ? "w-60" : "w-28"
       }`}
     >

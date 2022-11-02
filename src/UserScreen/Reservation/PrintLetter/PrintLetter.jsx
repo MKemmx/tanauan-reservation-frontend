@@ -83,10 +83,10 @@ const PrintLetter = ({ data }) => {
               {/* Conclusion */}
               <div className="mt-14 tracking-wide">
                 <p>
-                  Hence, I request the authority to permit Tanauan Leyte GYM
-                  Administrator to use the Tanauan GYM for above mentioned date.
-                  I promise you that, no harm or damage will be done by any
-                  means.
+                  Hence, I request the authority to permit the Facility
+                  Administrator to use the Tanauan Civic Center for above
+                  mentioned date. I promise you that, no harm or damage will be
+                  done by any means.
                 </p>
               </div>
 
@@ -164,8 +164,8 @@ const PrintLetter = ({ data }) => {
               </div>
 
               {/* Expiration Date */}
-              <div className="mt-20">
-                <p> NOT VALID WITHOUT OFFICAL SEAL & SIGNATURE </p>
+              <div className="mt-32">
+                {/* <p> NOT VALID WITHOUT OFFICAL SEAL & SIGNATURE </p> */}
               </div>
 
               <div className="mt-3 w-full py-4 flex flex-col items-end justify-center">
@@ -179,7 +179,7 @@ const PrintLetter = ({ data }) => {
           </div>
 
           {/* IDs */}
-          <div className="mt-18 pt-8 px-10">
+          <div className="mt-20 pt-8 px-10">
             {/* Logo */}
             <div className="flex justify-between items-center">
               <img className="w-24" src={tanauanLogo} />

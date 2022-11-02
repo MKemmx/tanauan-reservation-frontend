@@ -11,9 +11,12 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Admin */
+
 .sidebar-bg {
   background-color: #0a3e69;
 }
+
 .menu-active {
   background-color: #114b7b;
 }

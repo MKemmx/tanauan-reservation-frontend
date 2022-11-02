@@ -11,6 +11,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+// Components
+import YearlyMenu from "./YearlyMenu";
+
 import Select from "react-select";
 
 // Api and Axios
@@ -141,56 +144,58 @@ const AdminBarChart = () => {
   };
 
   return (
-    <div className="w-full h-96 pb-20">
+    <div className="w-full">
       {loading ? (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-96 flex items-center justify-center">
           <Loader />
         </div>
       ) : (
         <>
-          <div className="flex justify-between items-center py-2">
-            <div>
-              <h1 className="font-medium text-lg">Yearly Analytics</h1>
-            </div>
+          <div className="w-full flex justify-between align-center py-5 px-4 border-b-2 border-gray-200 mb-3">
+            <h2 className="text-lg font-medium text-gray-600">
+              Yearly Reservations
+            </h2>
 
-            <div className="space-y-1 w-40">
-              <label className="text-gray-700">Select Year:</label>
-              <Select
-                value={yearSelected}
-                onChange={({ value }) => {
-                  setYearSelected({
-                    value: value,
-                    label: value,
-                  });
-                }}
-                name="year"
-                options={options}
-              />
+            <div>
+              <YearlyMenu data={data} yearSelected={yearSelected} />
             </div>
           </div>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data}
-              margin={{
-                top: 5,
-                right: 5,
-                left: 5,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="1 1" />
-              <XAxis dataKey="name" />
-              <YAxis
-                type="number"
-                dataKey={(item) => parseInt(item.reserved)}
-                allowDecimals={false}
-                domain={[0, "dataMax + 5"]}
-              />
-              <Tooltip />
-              <Bar dataKey="reserved" fill="#0A3E69" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="px-5">
+            <div className="flex justify-end items-center my-2">
+              <div className=" space-y-1 w-40">
+                <label className="text-gray-700">Select Year:</label>
+                <Select
+                  value={yearSelected}
+                  onChange={({ value }) => {
+                    setYearSelected({
+                      value: value,
+                      label: value,
+                    });
+                  }}
+                  name="year"
+                  options={options}
+                />
+              </div>
+            </div>
+
+            <div id="barChart" className="pr-10 py-5 bg-white">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={data}>
+                  <CartesianGrid strokeDasharray="1 1" />
+                  <XAxis dataKey="name" />
+                  <YAxis
+                    type="number"
+                    dataKey={(item) => parseInt(item.reserved)}
+                    allowDecimals={false}
+                    domain={[0, "dataMax + 5"]}
+                  />
+                  <Tooltip />
+                  <Bar dataKey="reserved" fill="#0A3E69" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </>
       )}
     </div>

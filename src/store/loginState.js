@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 import api from "../utils/api";
 import axios from "axios";
 
+// Loggier
+import logger from "../Logger_Func/logger";
+
 const loginStore = (set, get) => ({
   resetPasswordRequest: false,
   loginAs: "",
@@ -112,7 +115,17 @@ const loginStore = (set, get) => ({
       return false;
     }
   },
-  logout: () => {
+  logout: async () => {
+    let oldState = get();
+
+    let msg;
+    if (oldState.loginAs === "admin") {
+      msg = `Admin has logged out.`;
+    } else {
+      msg = `${oldState?.user?.firstName} has logged out.`;
+    }
+    logger(msg);
+
     set({
       loginAs: null,
       isAuthenticated: false,

@@ -26,6 +26,8 @@ const dashboardStore = (set, get) => ({
       });
       const { data } = await axios.get(`${api}/admin/dashboard`, config);
 
+      console.log(data?.dashboardData);
+
       set({
         dashboardData: data.dashboardData,
         loading: false,

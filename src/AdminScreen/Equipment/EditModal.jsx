@@ -52,7 +52,7 @@ const Edit = ({ editModalData, fetchEquipments, closeEditModal }) => {
       await fetchEquipments();
       closeEditModal();
       setLoading(false);
-      return Swal.fire("Success", "New Equipment has been added!", "success");
+      return Swal.fire("Success", "Equipment has been updated!", "success");
     } catch (error) {
       setLoading(false);
       return Swal.fire("Error", `${error.response.data.msg}`, "error");

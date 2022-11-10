@@ -54,7 +54,7 @@ const AddRatingModal = ({ addRatingData, setAddRatingData }) => {
       setLoading(false);
       return Swal.fire(
         "Success",
-        `Rating Added! Thank you for your response`,
+        `Rating Added, Thank you for your response!`,
         "success"
       );
     } catch (error) {

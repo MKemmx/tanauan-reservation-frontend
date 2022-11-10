@@ -51,7 +51,7 @@ const Dashboard = () => {
                   <CountUp
                     className="text-2xl "
                     duration={animationDuration}
-                    end={dashboardData.rating}
+                    end={dashboardData.reservations}
                   />
                 </p>
               </div>
@@ -142,7 +142,7 @@ const Dashboard = () => {
                 <MdOutlineComputer size={30} color="#fff" />
               </div>
               <div>
-                <h2 className="text-lg"> System Logs </h2>
+                <h2 className="text-lg"> Logs </h2>
                 <p className="text-gray-700 text-base">
                   <CountUp
                     className="text-2xl "

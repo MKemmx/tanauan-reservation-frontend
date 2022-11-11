@@ -41,8 +41,10 @@ const HelperModal = ({ setShowHelperModal }) => {
           <div className="text-gray-700 mt-4 px-4">
             <p className="text-md font-medium mb-1"> Notes: </p>
             <ul className="ml-8">
-              <li className="list-disc">Reds are whole day reserved.</li>
-              <li className="list-disc">Yellow are half day reserved.</li>
+              <li className="list-disc">Red, are above 24 hours reserved.</li>
+              <li className="list-disc">
+                Yellow, are below 24 hours reserved.
+              </li>
               <li className="list-disc">
                 You can clicked the reserved date to get more data.
               </li>

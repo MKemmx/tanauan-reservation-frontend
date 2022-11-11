@@ -11,24 +11,24 @@ export const adminMenu = [
     link: "/",
   },
   {
-    name: "Users",
-    icon: <FaUsers color="#fff" size={26} />,
-    link: "/user",
-  },
-  {
     name: "Reservations",
     icon: <AiOutlineSchedule color="#fff" size={26} />,
     link: "/reservation",
   },
   {
-    name: "Ratings",
-    icon: <AiOutlineStar color="#fff" size={26} />,
-    link: "/rating",
+    name: "Users",
+    icon: <FaUsers color="#fff" size={26} />,
+    link: "/user",
   },
   {
     name: "Equipments",
     icon: <BsTools color="#fff" size={26} />,
     link: "/equipment",
+  },
+  {
+    name: "Ratings",
+    icon: <AiOutlineStar color="#fff" size={26} />,
+    link: "/rating",
   },
   {
     name: "System Logs",

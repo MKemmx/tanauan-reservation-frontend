@@ -98,7 +98,7 @@ const EquipmentTable = () => {
                   }}
                   className={`flex items-center bg-red-600 hover:bg-red-700 text-white py-1.5 px-2 font-medium duration-200 ease-in-out capitalize rounded-lg`}
                 >
-                  Archive
+                  Deactivate
                   {/* <MdDeleteOutline className="ml-1" size={18} /> */}
                 </button>
               ) : (

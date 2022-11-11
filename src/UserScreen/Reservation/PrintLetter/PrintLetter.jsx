@@ -119,7 +119,10 @@ const PrintLetter = ({ data }) => {
                     {/* Borrowed Items */}
                     <div className="mt-5">
                       <div className="mb-1">
-                        <h1 className="font-medium"> Requested Equipments: </h1>
+                        <h1 className="font-medium">
+                          Requested Equipments: Put check if available (✓), (×)
+                          if not.
+                        </h1>
                       </div>
                       <div className="flex space-x-1">
                         {data?.equipments.map((item) => (

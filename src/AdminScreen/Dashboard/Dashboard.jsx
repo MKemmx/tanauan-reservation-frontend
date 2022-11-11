@@ -13,12 +13,17 @@ import { BiCalendarCheck } from "react-icons/bi";
 import { BsTools } from "react-icons/bs";
 import { AiOutlineStar } from "react-icons/ai";
 
+// Navigate
+import { useNavigate } from "react-router-dom";
+
 // Login State
 import useLoginState from "../../store/loginState";
 // Admin Dashboard State
 import useDashboardState from "../../store/AdminStore/dashboardState";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   // Animation Duration
   const animationDuration = 2;
   const { token } = useLoginState((state) => state);
@@ -35,7 +40,12 @@ const Dashboard = () => {
   return (
     <>
       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-sky-500 rounded-xl shadow-lg">
+        <div
+          onClick={() => {
+            navigate("/reservation");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-sky-500 rounded-xl shadow-lg cursor-pointer"
+        >
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
               <Loader />
@@ -59,7 +69,12 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-green-500 rounded-xl shadow-lg">
+        <div
+          onClick={() => {
+            navigate("/user");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-green-500 rounded-xl shadow-lg cursor-pointer"
+        >
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
               <Loader />
@@ -83,7 +98,12 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-red-500 rounded-xl shadow-lg">
+        <div
+          onClick={() => {
+            navigate("/equipment");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-red-500 rounded-xl shadow-lg cursor-pointer"
+        >
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
               <Loader />
@@ -107,7 +127,12 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-yellow-500 rounded-xl shadow-lg">
+        <div
+          onClick={() => {
+            navigate("/rating");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-yellow-500 rounded-xl shadow-lg cursor-pointer"
+        >
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
               <Loader />
@@ -131,7 +156,12 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="flex items-center px-10 py-5 bg-white border-r-8 border-gray-500 rounded-xl shadow-lg">
+        <div
+          onClick={() => {
+            navigate("/logs");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-gray-500 rounded-xl shadow-lg cursor-pointer"
+        >
           {loading ? (
             <div className="w-full flex justify-center items-center py-5">
               <Loader />

@@ -119,8 +119,7 @@ const TermsAndConditions = () => {
                   24 HRS of payment before the event.
                 </li>
                 <li className="list-disc">
-                  Reservation for 1 day equivalent to 8 hrs and beond is another
-                  payment.
+                  Reservation that is beyond 24 hours, is another payment.
                 </li>
                 <li className="list-disc">
                   Immediate use and reservation is strictly probhibited.

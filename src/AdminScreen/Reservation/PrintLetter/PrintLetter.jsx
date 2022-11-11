@@ -10,6 +10,9 @@ import moment from "moment";
 
 const PrintLetter = ({ data }) => {
   const componentRef = useRef();
+
+  console.log(data);
+
   return (
     <>
       <ReactToPrint
@@ -99,12 +102,67 @@ const PrintLetter = ({ data }) => {
                 </div>
 
                 <div>
-                  <p className="overline">Signature of the GYM Administrator</p>
+                  <p className="overline">
+                    Signature of the Civic Center Administrator
+                  </p>
                 </div>
               </div>
 
+              <div className="h-36">
+                {data?.equipments?.length > 0 ? (
+                  <>
+                    {/* Borrowed Items */}
+                    <div className="mt-5">
+                      <div className="mb-1">
+                        <h1 className="font-medium">
+                          Requested Equipments: Put check if available (✓), (×)
+                          if not.
+                        </h1>
+                      </div>
+                      <div className="flex space-x-1">
+                        {data?.equipments.map((item) => (
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                            />
+                            <label className="ml-2 text-base font-normal capitalize">
+                              {item?.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Success Fully Returned */}
+                    <div className="mt-5">
+                      <div className="mb-1">
+                        <h1 className="font-medium"> Returned Equipments: </h1>
+                      </div>
+                      <div className="flex space-x-1">
+                        {data?.equipments.map((item) => (
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              defaultValue
+                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                            />
+                            <label className="ml-2 text-base font-normal capitalize">
+                              {item?.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+
               {/* Expiration Date */}
-              <div className="mt-36">
+              <div className="mt-10">
                 <p> NOT VALID WITHOUT OFFICAL SEAL & SIGNATURE </p>
 
                 <div className="mt-12 w-full py-4 flex flex-col items-end justify-center">

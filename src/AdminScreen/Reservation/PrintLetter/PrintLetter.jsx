@@ -11,8 +11,6 @@ import moment from "moment";
 const PrintLetter = ({ data }) => {
   const componentRef = useRef();
 
-  console.log(data);
-
   return (
     <>
       <ReactToPrint

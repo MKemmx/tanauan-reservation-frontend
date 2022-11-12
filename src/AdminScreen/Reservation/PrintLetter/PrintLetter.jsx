@@ -101,7 +101,7 @@ const PrintLetter = ({ data }) => {
 
                 <div>
                   <p className="overline">
-                    Signature of the Civic Center Administrator
+                    Signature of the Assigned Personnel
                   </p>
                 </div>
               </div>

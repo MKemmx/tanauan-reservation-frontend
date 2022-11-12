@@ -59,6 +59,18 @@ const Register = () => {
       return Swal.fire("Error", "Please enter lastname", "error");
     }
 
+    if (/\d/.test(data.firstName)) {
+      return Swal.fire(
+        "Error",
+        "First name should not contain number",
+        "error"
+      );
+    }
+
+    if (/\d/.test(data.lastName)) {
+      return Swal.fire("Error", "Last name should not contain number", "error");
+    }
+
     if (data.email === "") {
       return Swal.fire("Error", "Please enter Email Address", "error");
     }

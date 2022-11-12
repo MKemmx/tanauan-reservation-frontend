@@ -258,7 +258,14 @@ const Register = () => {
                       <input
                         name="firstName"
                         value={data.firstName}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          if (/\d/.test(val)) {
+                            return;
+                          } else {
+                            handleChange(e);
+                          }
+                        }}
                         type="text"
                         className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md d focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                       />
@@ -272,7 +279,14 @@ const Register = () => {
                       <input
                         name="lastName"
                         value={data.lastName}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          if (/\d/.test(val)) {
+                            return;
+                          } else {
+                            handleChange(e);
+                          }
+                        }}
                         type="text"
                         className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md d   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                       />

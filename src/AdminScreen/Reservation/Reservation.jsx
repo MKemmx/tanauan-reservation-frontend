@@ -237,21 +237,36 @@ const Reservation = () => {
           subHeaderComponent={
             <div className="w-full flex flex-col md:flex-row justify-between items-center">
               {data?.length >= 1 && (
-                <div className="space-x-2 pb-2">
-                  <button
-                    onClick={download_pdf}
-                    className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
-                  >
-                    Export PDF
-                  </button>
-                  <CSVLink
-                    className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
-                    filename={"reservers.csv"}
-                    data={filteredData.length >= 1 ? filteredData : data}
-                    headers={headers}
-                  >
-                    Export CSV
-                  </CSVLink>
+                <div className="">
+                  <div className="space-x-2 pb-2">
+                    <button
+                      onClick={download_pdf}
+                      className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
+                    >
+                      Export PDF
+                    </button>
+                    <CSVLink
+                      className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
+                      filename={"reservers.csv"}
+                      data={filteredData.length >= 1 ? filteredData : data}
+                      headers={headers}
+                    >
+                      Export CSV
+                    </CSVLink>
+                  </div>
+
+                  <div className="space-x-2 ">
+                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
+                      Pending
+                    </button>
+                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
+                      Reserved
+                    </button>
+
+                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
+                      Rejected
+                    </button>
+                  </div>
                 </div>
               )}
 

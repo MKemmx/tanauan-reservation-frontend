@@ -224,7 +224,14 @@ const PrintLetter = ({ data }) => {
                 </div>
               </div>
 
-              <div className="mt-28 w-full py-4 flex flex-col items-end justify-center">
+              <div className="mt-10 flex justify-center">
+                <h1 className="font-normal text-gray-500 italic">
+                  (Note: If reservation is more than 24hours you be charged for
+                  another payment )
+                </h1>
+              </div>
+
+              <div className="mt-18 w-full py-4 flex flex-col items-end justify-center">
                 <div>
                   Downloaded By: {user?.firstName} {user?.middleName}
                   {user?.lastName}

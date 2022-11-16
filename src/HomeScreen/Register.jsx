@@ -256,6 +256,9 @@ const Register = () => {
                       </label>
 
                       <input
+                        style={{
+                          textTransform: "capitalize",
+                        }}
                         name="firstName"
                         value={data.firstName}
                         onChange={(e) => {
@@ -277,6 +280,9 @@ const Register = () => {
                         </label>
                       </div>
                       <input
+                        style={{
+                          textTransform: "capitalize",
+                        }}
                         name="lastName"
                         value={data.lastName}
                         onChange={(e) => {
@@ -582,7 +588,9 @@ const Register = () => {
                               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                             />
                           </svg>
-                          <h2 className="mx-3 text-gray-700">Upload Letter</h2>
+                          <h2 className="mx-3 text-gray-700">
+                            Upload Authorization Letter From Government Agency
+                          </h2>
                           <input
                             name="governmentLetter"
                             onChange={handlePhoto}

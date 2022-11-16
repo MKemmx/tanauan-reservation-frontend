@@ -60,6 +60,16 @@ const AddModal = ({ setShowAddModal }) => {
       return Swal.fire("Error", "Please enter reservation category", "error");
     }
 
+    let minresDate = moment(moment().toDate()).add(2, "days").toDate();
+
+    if (startDate <= minresDate) {
+      return Swal.fire(
+        "Error",
+        "Reservation must be made 2 days before the reservation date.",
+        "error"
+      );
+    }
+
     if (startDate === "") {
       return Swal.fire("Error", "Please enter start date", "error");
     }
@@ -205,7 +215,9 @@ const AddModal = ({ setShowAddModal }) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       showTimeInput
-                      minDate={moment().toDate()}
+                      minDate={moment(moment().toDate())
+                        .add(2, "days")
+                        .toDate()}
                     />
                   </div>
                   <div>
@@ -219,7 +231,9 @@ const AddModal = ({ setShowAddModal }) => {
                       timeInputLabel="Time:"
                       dateFormat="MM/dd/yyyy h:mm aa"
                       showTimeInput
-                      minDate={moment().toDate()}
+                      minDate={moment(moment().toDate())
+                        .add(2, "days")
+                        .toDate()}
                     />
                   </div>
                 </div>

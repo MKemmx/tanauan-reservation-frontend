@@ -110,9 +110,10 @@ const UserReservation = () => {
                   onClick={() => {
                     setAddRatingData(row);
                   }}
-                  className="bg-[#16A34A] py-1 px-2.5 rounded-md"
+                  className="bg-[#F39C12] py-1.5 px-2.5 rounded-md text-white "
                 >
-                  <BiCommentAdd size={18} color="#fff" />
+                  Rate
+                  {/* <BiCommentAdd size={18} color="#fff" /> */}
                 </button>
               )}
 

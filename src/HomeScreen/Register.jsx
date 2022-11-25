@@ -47,6 +47,9 @@ const Register = () => {
     let numberRegex =
       /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
+    // Email Regix
+    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
     if (data.profile === null) {
       return Swal.fire("Error", "Profile is required!", "error");
     }
@@ -73,6 +76,10 @@ const Register = () => {
 
     if (data.email === "") {
       return Swal.fire("Error", "Please enter Email Address", "error");
+    }
+
+    if (!emailRegex.test(data.email)) {
+      return Swal.fire("Error", "Please enter a valid email address", "error");
     }
 
     if (data.phoneNumber === "") {

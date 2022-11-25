@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Swal
 import Swal from "sweetalert2";
@@ -10,12 +10,15 @@ import { GrFormClose } from "react-icons/gr";
 import { MdEventAvailable } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { BsTools } from "react-icons/bs";
+import { RiGovernmentLine } from "react-icons/ri";
+
 // API AND AXIOS
 import api from "../../utils/api";
 import axios from "axios";
 
 // State
 import useLoginState from "../../store/loginState";
+import Loader from "../../components/Loader/Loader";
 
 const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
   const { token } = useLoginState((state) => state);
@@ -25,6 +28,31 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
       "Content-Type": "application/json",
       "auth-token": token,
     },
+  };
+
+  // Check if Payment is done
+  const isPaymentDone = async () => {
+    try {
+      const { data } = await axios.get(
+        `${api}/payment/${reserver?._id}`,
+        config
+      );
+
+      if (data.payment === null) {
+        Swal.fire(
+          "Payment is required",
+          "Please upload reservation receipt, before confirming this reservation!",
+          "error"
+        );
+
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error.response.data.msg);
+      return false;
+    }
   };
 
   const confirmButton = (e) => {
@@ -37,11 +65,18 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Confirm",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        updateReservationStatus("reserved");
-        // Close Modal
-        setShowModal(false);
+        if (reserver?.userId?.organizationType === "nonGovernment") {
+          let alreadyPaid = await isPaymentDone();
+          if (alreadyPaid) {
+            updateReservationStatus("reserved");
+            setShowModal(false);
+          }
+        } else {
+          updateReservationStatus("reserved");
+          setShowModal(false);
+        }
       }
     });
   };
@@ -95,6 +130,67 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
     if (id === "backdrop") return setShowModal(false);
   };
 
+  // Receipt
+  const [showUpload, setShowUpload] = useState(false);
+  const [reservationReceipt, setReservationReceipt] = useState(null);
+
+  // Loading State
+  const [loadingPayment, setLoadingPayment] = useState(true);
+
+  const handleUploadReceipt = async (e) => {
+    e.preventDefault();
+
+    if (reservationReceipt === null) {
+      return Swal.fire("Error", "Please upload image receipt", "error");
+    }
+
+    const formData = new FormData();
+    formData.append("reservationId", reserver._id);
+    formData.append("paymentReceipt", reservationReceipt);
+
+    try {
+      setLoadingPayment(true);
+      // Form Data
+      await axios.post(`${api}/payment`, formData, config);
+      await checkIfAlreadyPaid();
+      Swal.fire(
+        "Success",
+        "Payment Receipt has successfully added, you can now confirm the reservation.",
+        "success"
+      );
+
+      setLoadingPayment(false);
+    } catch (error) {
+      setLoadingPayment(false);
+      Swal.fire("Error", `${error.response.data.msg}`, "error");
+    }
+  };
+
+  const checkIfAlreadyPaid = async () => {
+    try {
+      setLoadingPayment(true);
+      const { data } = await axios.get(
+        `${api}/payment/${reserver?._id}`,
+        config
+      );
+      if (data.payment === null) {
+        setLoadingPayment(false);
+        return setShowUpload(true);
+      }
+
+      setLoadingPayment(false);
+      return setShowUpload(false);
+    } catch (error) {
+      console.log(error.response.data.msg);
+      setLoadingPayment(false);
+      setShowUpload(true);
+    }
+  };
+
+  useEffect(() => {
+    checkIfAlreadyPaid();
+  }, []);
+
   return (
     <div
       onClick={handleBackdrop}
@@ -104,7 +200,7 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
       <div className="mx-auto w-full max-w-2xl bg-white-200 h-auto shadow-lg ">
         {/* Modal Header */}
         <div className="flex bg-white border-b border-gray-200 px-3 py-6 justify-between items-center">
-          <h3 class="text-xl font-semibold text-gray-900">
+          <h3 className="text-xl font-semibold text-gray-900">
             Reservation Details
           </h3>
           <div
@@ -142,6 +238,16 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
                 </div>
                 <h1 className="px-2 text-base"> {reserver?.title} </h1>
               </div>
+
+              <div className="flex items-center mt-2 text-gray-700">
+                <div className="flex items-center space-x-2">
+                  <RiGovernmentLine size={22} />
+                  <p className="font-medium text-lg">Organization Type:</p>
+                </div>
+                <h1 className="px-2 text-base capitalize">
+                  {reserver?.userId?.organizationType}{" "}
+                </h1>
+              </div>
             </div>
 
             <div className="flex-col">
@@ -169,17 +275,92 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
                 <p className="font-medium"> Equipments Requested:</p>
               </div>
               <ul className="mt-2 ml-10">
-                {reserver?.equipments?.map((item) => (
-                  <li className="list-disc capitalize">{item?.name}</li>
-                ))}
+                {reserver?.equipments?.map((item, index) => {
+                  return (
+                    <div key={index} className="flex">
+                      <li className="capitalize list-disc">
+                        <span className="font-medium mr-1">Name:</span>
+                        {item?.equipment?.name}
+                      </li>
+                      <li className="ml-3">
+                        <span className="font-medium mr-1">Quantity:</span>
+                        {item?.qty}
+                      </li>
+                    </div>
+                  );
+                })}
               </ul>
             </div>
+          )}
+
+          {loadingPayment ? (
+            <div className="w-full flex justify-center items-center h-28">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              {showUpload && (
+                <>
+                  {reserver?.userId?.organizationType === "nonGovernment" &&
+                    reserver?.status === "pending" && (
+                      <>
+                        <div className="bg-white mt-5 px-3 shadow-lg">
+                          <div className="py-8">
+                            <label
+                              className="block mb-2 text-sm font-medium text-gray-900"
+                              htmlFor="file_input"
+                            >
+                              Upload Reservation Receipt
+                            </label>
+                            <input
+                              onChange={(e) => {
+                                let file = e.target.files[0];
+                                if (e.target.files && file) {
+                                  setReservationReceipt(file);
+                                } else {
+                                  setReservationReceipt(null);
+                                }
+                              }}
+                              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                              type="file"
+                            />
+                          </div>
+
+                          {reservationReceipt !== null && (
+                            <div className="py-3 flex justify-center items-center flex-col">
+                              <div className="bg-red-100">
+                                <img
+                                  className="object-cover h-48 w-48"
+                                  src={
+                                    reservationReceipt !== null &&
+                                    URL.createObjectURL(reservationReceipt)
+                                  }
+                                  alt="receipt image"
+                                />
+                              </div>
+
+                              <div className="mt-5 w-full">
+                                <button
+                                  onClick={handleUploadReceipt}
+                                  className="w-full px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                                >
+                                  Upload
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
+                </>
+              )}
+            </>
           )}
         </div>
 
         {/* Modal Footer */}
         {reserver?.status === "pending" && (
-          <div className="flex items-center p-4 bg-white space-x-2 rounded-b border-t border-gray-200">
+          <div className="flex items-center justify-end p-4 bg-white space-x-2 rounded-b border-t border-gray-200">
             <button
               onClick={confirmButton}
               type="button"
@@ -187,13 +368,16 @@ const ViewModal = ({ reserver, setShowModal, fetchReservations }) => {
             >
               Confirm
             </button>
-            <button
-              onClick={rejectButton}
-              type="button"
-              className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm font-medium px-5 py-2.5"
-            >
-              Reject
-            </button>
+
+            {showUpload && (
+              <button
+                onClick={rejectButton}
+                type="button"
+                className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm font-medium px-5 py-2.5"
+              >
+                Reject
+              </button>
+            )}
           </div>
         )}
       </div>

@@ -52,7 +52,8 @@ const AddModal = ({ setShowAddModal }) => {
 
     let selectedEquipments = equipmentsData.map((item) => {
       return {
-        _id: item.value,
+        equipment: item.value,
+        qty: item?.qty,
       };
     });
 
@@ -119,6 +120,7 @@ const AddModal = ({ setShowAddModal }) => {
 
   // Fetch Equipments options
   const [equipmentOptions, setEquipmentOptions] = useState([]);
+
   const [equipmentsData, setEquipmentsData] = useState([]);
   const fetchAvailableEquipments = async () => {
     try {
@@ -127,10 +129,11 @@ const AddModal = ({ setShowAddModal }) => {
         `${api}/equipment/available-equipment`,
         config
       );
-      let options = data.equipments.map((item) => {
+      let options = data?.equipments?.map((item) => {
         return {
           value: item._id,
           label: item.name,
+          qty: 0,
         };
       });
       setEquipmentOptions(options);
@@ -175,7 +178,7 @@ const AddModal = ({ setShowAddModal }) => {
             </div>
           ) : (
             <>
-              <form className="w-full px-6 py-3 h-72 ">
+              <form className="w-full px-6 py-3 h-auto">
                 <div className="px-0 py-2">
                   <label className="block mb-1 text-md font-medium text-gray-900">
                     Event Categories:
@@ -202,6 +205,38 @@ const AddModal = ({ setShowAddModal }) => {
                       setEquipmentsData(selectedOption);
                     }}
                   />
+                </div>
+
+                {/*  */}
+
+                <div>
+                  {equipmentsData?.map((item) => (
+                    <div className="flex items-center space-x-4 mt-1 mb-3">
+                      <div>
+                        <label className="block mb-1 text-md font-medium text-gray-900 capitalize">
+                          {item?.label}:
+                        </label>
+                      </div>
+
+                      <input
+                        onChange={(e) => {
+                          const { name, value } = e.target;
+                          let newData = equipmentsData;
+                          for (let item of newData) {
+                            item?.label === name
+                              ? (item.qty = parseInt(value))
+                              : item;
+                          }
+                          setEquipmentsData(newData);
+                        }}
+                        type="number"
+                        name={item?.label}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 outline-none text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Enter item quantity.."
+                        required
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <div className="mt-2 flex items-center py-3 space-x-5 justify-center rounded-lg border  border-gray-300 bg-gray-50 ">

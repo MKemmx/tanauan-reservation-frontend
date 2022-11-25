@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Select from "react-select";
+
 // Data Table
 import DataTable from "react-data-table-component";
 import moment from "moment";
@@ -49,9 +51,9 @@ const Reservation = () => {
     {
       name: "Reserver",
       selector: (row) => (
-        <>
+        <div className="capitalize">
           {row?.userId?.firstName} {row?.userId?.lastName}
-        </>
+        </div>
       ),
       sortable: true,
     },
@@ -98,6 +100,13 @@ const Reservation = () => {
       ),
       sortable: true,
     },
+
+    {
+      name: "Date Approved",
+      selector: (row) => <>{row?.dateApproved}</>,
+      sortable: true,
+    },
+
     {
       name: "Action",
       cell: (row) => {
@@ -131,21 +140,37 @@ const Reservation = () => {
     },
   };
 
+  //
+  const options = [
+    { value: "all", label: "All" },
+    { value: "pending", label: "Pending" },
+    { value: "reserved", label: "Reserved" },
+    { value: "rejected", label: "Rejected" },
+    { value: "cancelled", label: "Cancelled" },
+  ];
+  const [selectedStatus, setSelectedStatus] = useState(options[0]);
+
   // Fetch Reservations
   const fetchReservations = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`${api}/reservation`, config);
-
-      setData(
-        data.reservation.map((reser) => {
-          return {
-            ...reser,
-            start: moment(reser.start).format("lll"),
-            end: moment(reser.end).format("lll"),
-          };
-        })
+      const { data } = await axios.get(
+        `${api}/reservation?status=${selectedStatus.value}`,
+        config
       );
+
+      let mainData = data.reservation.map((reser) => {
+        return {
+          ...reser,
+          start: moment(reser.start).format("lll"),
+          end: moment(reser.end).format("lll"),
+          dateApproved: reser?.dateApproved
+            ? moment(reser.dateApproved).format("lll")
+            : "",
+        };
+      });
+
+      setData(mainData);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -173,6 +198,11 @@ const Reservation = () => {
     setFilteredData(result);
   }, [search]);
 
+  // Call Each Time Query Change`
+  useEffect(() => {
+    fetchReservations();
+  }, [selectedStatus]);
+
   // CSV HEADERS
   const headers = [
     { label: "First Name", key: "userId.firstName" },
@@ -180,6 +210,7 @@ const Reservation = () => {
     { label: "Start Date", key: "start" },
     { label: "End Date", key: "end" },
     { label: "Status", key: "status" },
+    { label: "Date Approved", key: "dateApproved" },
   ];
 
   // Export PDF
@@ -195,6 +226,7 @@ const Reservation = () => {
         "Start Date",
         "End Date",
         "Reservation Status",
+        "Date Approved",
       ],
     ];
     let body = toPrintArray.map((item) => {
@@ -205,6 +237,7 @@ const Reservation = () => {
         item.start,
         item.end,
         item.status,
+        item.dateApproved,
       ];
     });
     doc.autoTable({ head: head, body: body });
@@ -235,51 +268,58 @@ const Reservation = () => {
           pagination
           subHeader
           subHeaderComponent={
-            <div className="w-full flex flex-col md:flex-row justify-between items-center">
-              {data?.length >= 1 && (
-                <div className="">
-                  <div className="space-x-2 pb-2">
-                    <button
-                      onClick={download_pdf}
-                      className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
-                    >
-                      Export PDF
-                    </button>
-                    <CSVLink
-                      className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
-                      filename={"reservers.csv"}
-                      data={filteredData.length >= 1 ? filteredData : data}
-                      headers={headers}
-                    >
-                      Export CSV
-                    </CSVLink>
+            <div className="w-full">
+              <div
+                className={`w-full flex flex-col md:flex-row justify-between items-center`}
+              >
+                {data?.length >= 1 ? (
+                  <div className="">
+                    <div className="space-x-2">
+                      <button
+                        onClick={download_pdf}
+                        className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
+                      >
+                        Export PDF
+                      </button>
+                      <CSVLink
+                        className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer"
+                        filename={"reservers.csv"}
+                        data={filteredData.length >= 1 ? filteredData : data}
+                        headers={headers}
+                      >
+                        Export CSV
+                      </CSVLink>
+                    </div>
                   </div>
+                ) : (
+                  <div></div>
+                )}
 
-                  <div className="space-x-2 ">
-                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
-                      Pending
-                    </button>
-                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
-                      Reserved
-                    </button>
-
-                    <button className="bg-[#114B7B] text-white px-2 py-1 rounded-md cursor-pointer">
-                      Rejected
-                    </button>
-                  </div>
+                <div className="w-96 py-2 flex items-end justify-end flex-col">
+                  <input
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
+                    value={search}
+                    type="text"
+                    placeholder="Search here"
+                    className="w-full block outline-none max-w-xs px-2 py-1.5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md"
+                  />
                 </div>
-              )}
+              </div>
 
-              <input
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-                value={search}
-                type="text"
-                placeholder="Search here"
-                id="large-input"
-                className="block outline-none max-w-xs px-2 py-1.5 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md"
-              />
+              <div className="w-full flex items-center justify-end mt-1">
+                <div className="w-36">
+                  <Select
+                    onChange={(data) => {
+                      setSelectedStatus(data);
+                    }}
+                    value={selectedStatus}
+                    placeholder="Select Status.."
+                    options={options}
+                  />{" "}
+                </div>
+              </div>
             </div>
           }
         />

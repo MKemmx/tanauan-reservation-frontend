@@ -19,6 +19,7 @@ import Reservation from "./AdminScreen/Reservation/Reservation";
 import Rating from "./AdminScreen/Rating/RatingTable";
 import EquipmentTable from "./AdminScreen/Equipment/EquipmentTable";
 import AdminDetails from "./AdminScreen/AdminDetails/AdminDetails";
+import PaymentTable from "./AdminScreen/Payment/Payment";
 import LogsTable from "./AdminScreen/AdminLogs/LogsTable";
 
 // User Components
@@ -63,6 +64,7 @@ function App() {
               <Route path="/reservation" element={<Reservation />} />
               <Route path="/rating" element={<Rating />} />
               <Route path="/equipment" element={<EquipmentTable />} />
+              <Route path="/payment" element={<PaymentTable />} />
               <Route path="/logs" element={<LogsTable />} />
               <Route path="/admin-details" element={<AdminDetails />} />
             </Routes>

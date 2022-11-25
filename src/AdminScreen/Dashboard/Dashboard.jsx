@@ -8,7 +8,7 @@ import AdminBarChart from "../Chart/AdminBarChart";
 // React Icons and animations
 import CountUp from "react-countup";
 import { FaUsers } from "react-icons/fa";
-import { MdOutlineComputer } from "react-icons/md";
+import { MdOutlineComputer, MdPayment } from "react-icons/md";
 import { BiCalendarCheck } from "react-icons/bi";
 import { BsTools } from "react-icons/bs";
 import { AiOutlineStar } from "react-icons/ai";
@@ -149,6 +149,35 @@ const Dashboard = () => {
                     className="text-2xl "
                     duration={animationDuration}
                     end={dashboardData.rating}
+                  />
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div
+          onClick={() => {
+            navigate("/payment");
+          }}
+          className="flex items-center px-10 py-5 bg-white border-r-8 border-teal-600 rounded-xl shadow-lg cursor-pointer"
+        >
+          {loading ? (
+            <div className="w-full flex justify-center items-center py-5">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              <div className="mr-8 bg-teal-600 p-3 rounded-full">
+                <MdPayment size={30} color="#fff" />
+              </div>
+              <div>
+                <h2 className="text-lg text"> Payments </h2>
+                <p className="text-gray-700 text-base">
+                  <CountUp
+                    className="text-2xl "
+                    duration={animationDuration}
+                    end={dashboardData.payment}
                   />
                 </p>
               </div>

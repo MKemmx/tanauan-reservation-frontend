@@ -74,7 +74,7 @@ const PrintLetter = ({ data }) => {
               </div>
 
               {/* Conclusion */}
-              <div className="mt-14 tracking-wide">
+              <div className="mt-12 tracking-wide">
                 <p>
                   Hence, I request the authority to permit Tanauan Leyte GYM
                   Administrator to use the Tanauan GYM for above mentioned date.
@@ -118,15 +118,18 @@ const PrintLetter = ({ data }) => {
                         </h1>
                       </div>
                       <div className="flex space-x-1">
-                        {data?.equipments.map((item) => (
-                          <div className="flex items-center">
-                            <input
-                              type="checkbox"
-                              defaultValue
-                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
-                            />
-                            <label className="ml-2 text-base font-normal capitalize">
-                              {item?.name}
+                        {data?.equipments.map((item, index) => (
+                          <div key={index} className="flex items-center mr-3">
+                            <div>
+                              <input
+                                type="checkbox"
+                                defaultValue
+                                className=" w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                              />
+                            </div>
+                            <label className="ml-3 text-base font-normal capitalize">
+                              <p>{item?.equipment?.name} </p>
+                              <p>Quantity: {item?.qty} </p>
                             </label>
                           </div>
                         ))}
@@ -139,15 +142,18 @@ const PrintLetter = ({ data }) => {
                         <h1 className="font-medium"> Returned Equipments: </h1>
                       </div>
                       <div className="flex space-x-1">
-                        {data?.equipments.map((item) => (
-                          <div className="flex items-center">
-                            <input
-                              type="checkbox"
-                              defaultValue
-                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
-                            />
-                            <label className="ml-2 text-base font-normal capitalize">
-                              {item?.name}
+                        {data?.equipments.map((item, index) => (
+                          <div key={index} className="flex items-center mr-3">
+                            <div>
+                              <input
+                                type="checkbox"
+                                defaultValue
+                                className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                              />
+                            </div>
+                            <label className="ml-3 text-base font-normal capitalize">
+                              <p>{item?.equipment?.name} </p>
+                              <p>Quantity: </p>
                             </label>
                           </div>
                         ))}
@@ -159,10 +165,15 @@ const PrintLetter = ({ data }) => {
                 )}
               </div>
 
+              <div className="mt-10 flex justify-center">
+                <h1 className="font-normal text-gray-500 italic">
+                  (Note: If you exceed your reservation time, you will be
+                  charged for another payment)
+                </h1>
+              </div>
+
               {/* Expiration Date */}
               <div className="mt-10">
-                <p> NOT VALID WITHOUT OFFICAL SEAL & SIGNATURE </p>
-
                 <div className="mt-12 w-full py-4 flex flex-col items-end justify-center">
                   <div>Downloaded By: Tanauan Civic Center Administrator</div>
                   <div>{moment().format("LLLL")}</div>

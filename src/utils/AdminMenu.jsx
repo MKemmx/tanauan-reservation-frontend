@@ -1,5 +1,9 @@
 // Icons
-import { MdOutlineDashboard, MdOutlineAccessTime } from "react-icons/md";
+import {
+  MdOutlineDashboard,
+  MdOutlineAccessTime,
+  MdPayment,
+} from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { AiOutlineSchedule, AiOutlineStar } from "react-icons/ai";
 import { BsTools } from "react-icons/bs";
@@ -29,6 +33,11 @@ export const adminMenu = [
     name: "Ratings",
     icon: <AiOutlineStar color="#fff" size={26} />,
     link: "/rating",
+  },
+  {
+    name: "Payments",
+    icon: <MdPayment color="#fff" size={26} />,
+    link: "/payment",
   },
   {
     name: "System Logs",

@@ -36,12 +36,20 @@ const UserTable = () => {
     // },
     {
       name: "First Name",
-      selector: (row) => row.firstName,
+      selector: (row) => (
+        <>
+          <h2 className="capitalize">{row.firstName}</h2>
+        </>
+      ),
       sortable: true,
     },
     {
       name: "Last Name",
-      selector: (row) => row.lastName,
+      selector: (row) => (
+        <>
+          <h2 className="capitalize">{row.lastName}</h2>
+        </>
+      ),
       sortable: true,
     },
     {

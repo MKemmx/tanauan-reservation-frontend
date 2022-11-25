@@ -126,14 +126,17 @@ const PrintLetter = ({ data }) => {
                       </div>
                       <div className="flex space-x-1">
                         {data?.equipments.map((item) => (
-                          <div className="flex items-center">
-                            <input
-                              type="checkbox"
-                              defaultValue
-                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
-                            />
-                            <label className="ml-2 text-base font-normal capitalize">
-                              {item?.name}
+                          <div className="flex items-center mr-3">
+                            <div>
+                              <input
+                                type="checkbox"
+                                defaultValue
+                                className=" w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                              />
+                            </div>
+                            <label className="ml-3 text-base font-normal capitalize">
+                              <p>{item?.equipment?.name} </p>
+                              <p>Quantity: {item?.qty} </p>
                             </label>
                           </div>
                         ))}
@@ -147,14 +150,17 @@ const PrintLetter = ({ data }) => {
                       </div>
                       <div className="flex space-x-1">
                         {data?.equipments.map((item) => (
-                          <div className="flex items-center">
-                            <input
-                              type="checkbox"
-                              defaultValue
-                              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
-                            />
-                            <label className="ml-2 text-base font-normal capitalize">
-                              {item?.name}
+                          <div className="flex items-center mr-3">
+                            <div>
+                              <input
+                                type="checkbox"
+                                defaultValue
+                                className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                              />
+                            </div>
+                            <label className="ml-3 text-base font-normal capitalize">
+                              <p>{item?.equipment?.name} </p>
+                              <p>Quantity: </p>
                             </label>
                           </div>
                         ))}
@@ -226,8 +232,8 @@ const PrintLetter = ({ data }) => {
 
               <div className="mt-10 flex justify-center">
                 <h1 className="font-normal text-gray-500 italic">
-                  (Note: If reservation is more than 24hours you be charged for
-                  another payment )
+                  (Note: If you exceed your reservation time, you will be
+                  charged for another payment)
                 </h1>
               </div>
 

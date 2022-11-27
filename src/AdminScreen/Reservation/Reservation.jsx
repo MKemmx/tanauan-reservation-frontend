@@ -142,11 +142,11 @@ const Reservation = () => {
 
   //
   const options = [
-    { value: "all", label: "All" },
     { value: "pending", label: "Pending" },
     { value: "reserved", label: "Reserved" },
     { value: "rejected", label: "Rejected" },
     { value: "cancelled", label: "Cancelled" },
+    { value: "all", label: "All" },
   ];
   const [selectedStatus, setSelectedStatus] = useState(options[0]);
 

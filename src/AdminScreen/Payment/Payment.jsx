@@ -79,7 +79,7 @@ const Payment = () => {
       name: "Email Address",
       selector: (row) => (
         <>
-          <h2 className="capitalize">{row.reservationId.userId.email}</h2>
+          <h2>{row.reservationId.userId.email}</h2>
         </>
       ),
       sortable: true,

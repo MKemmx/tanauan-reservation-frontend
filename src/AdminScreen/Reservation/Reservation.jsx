@@ -41,6 +41,26 @@ const Reservation = () => {
   const [showModal, setShowModal] = useState(false);
   const [reserver, setReserver] = useState(false);
 
+  //
+  const options = [
+    { value: "pending", label: "Pending" },
+    { value: "reserved", label: "Reserved" },
+    { value: "rejected", label: "Rejected" },
+    { value: "cancelled", label: "Cancelled" },
+    { value: "all", label: "All" },
+  ];
+  const [selectedStatus, setSelectedStatus] = useState(options[0]);
+
+  // Omit Date Approved if pending
+  const [hiddentApproved, setHiddenApproved] = useState(false);
+
+  useEffect(() => {
+    if (selectedStatus.value === "pending") {
+      return setHiddenApproved(true);
+    }
+    setHiddenApproved(false);
+  }, [selectedStatus]);
+
   // Data Columns
   const columns = [
     {
@@ -64,12 +84,12 @@ const Reservation = () => {
     },
     {
       name: "Start Date",
-      selector: (row) => <>{row?.start}</>,
+      selector: (row) => row.start,
       sortable: true,
     },
     {
       name: "End Date",
-      selector: (row) => <>{row?.end}</>,
+      selector: (row) => row.end,
       sortable: true,
     },
     {
@@ -100,13 +120,12 @@ const Reservation = () => {
       ),
       sortable: true,
     },
-
     {
       name: "Date Approved",
-      selector: (row) => <>{row?.dateApproved}</>,
+      selector: (row) => row?.dateApproved,
+      omit: hiddentApproved,
       sortable: true,
     },
-
     {
       name: "Action",
       cell: (row) => {
@@ -139,16 +158,6 @@ const Reservation = () => {
       "auth-token": token,
     },
   };
-
-  //
-  const options = [
-    { value: "pending", label: "Pending" },
-    { value: "reserved", label: "Reserved" },
-    { value: "rejected", label: "Rejected" },
-    { value: "cancelled", label: "Cancelled" },
-    { value: "all", label: "All" },
-  ];
-  const [selectedStatus, setSelectedStatus] = useState(options[0]);
 
   // Fetch Reservations
   const fetchReservations = async () => {

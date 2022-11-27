@@ -142,8 +142,8 @@ const Reservation = () => {
 
   //
   const options = [
-    { value: "reserved", label: "Reserved" },
     { value: "pending", label: "Pending" },
+    { value: "reserved", label: "Reserved" },
     { value: "rejected", label: "Rejected" },
     { value: "cancelled", label: "Cancelled" },
     { value: "all", label: "All" },

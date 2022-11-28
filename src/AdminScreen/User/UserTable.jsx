@@ -96,11 +96,11 @@ const UserTable = () => {
           <>
             {row.isVerified ? (
               <a className="px-3 py-2 capitalize rounded-3xl flex items-center justify-center font-medium bg-green-600 text-white">
-                True
+                Valid
               </a>
             ) : (
               <a className="px-3 py-2 capitalize rounded-3xl flex items-center justify-center font-medium bg-red-600 text-white">
-                False
+                Invalid
               </a>
             )}
           </>

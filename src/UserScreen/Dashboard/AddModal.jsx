@@ -251,7 +251,7 @@ const AddModal = ({ setShowAddModal }) => {
                       dateFormat="MM/dd/yyyy h:mm aa"
                       showTimeInput
                       minDate={moment(moment().toDate())
-                        .add(3, "days")
+                        .add(2, "days")
                         .toDate()}
                     />
                   </div>
@@ -267,7 +267,7 @@ const AddModal = ({ setShowAddModal }) => {
                       dateFormat="MM/dd/yyyy h:mm aa"
                       showTimeInput
                       minDate={moment(moment().toDate())
-                        .add(3, "days")
+                        .add(2, "days")
                         .toDate()}
                     />
                   </div>
